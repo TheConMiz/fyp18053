@@ -1,11 +1,21 @@
 import React from 'react';
-import Portal from './components/Portal';
+import {render} from 'react-dom';
+import AceEditor from 'react-ace';
+import brace from 'brace';
+
+import 'brace/theme/monokai';
+import 'brace/mode/javascript';
 
 class App extends React.Component {
     render() {
         return ( 
             <div className = "App" >
-                <Portal></Portal> 
+                <AceEditor
+                    theme = "monokai"
+                    name = "test1"
+                    height = "5em"
+                    fontSize = {16}
+                />
             </div>
         );
     }
