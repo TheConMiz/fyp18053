@@ -17,7 +17,6 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import ListSubheader from '@material-ui/core/ListSubheader'
 import Hidden from '@material-ui/core/Hidden/Hidden'
 import ToolTip from '@material-ui/core/Tooltip/Tooltip'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'; 
 // give each thing a class name later
 
 const drawerWidth = 240;
@@ -61,7 +60,7 @@ class AppDrawer extends React.Component{
   constructor(props){
     super(props)
     this.state = { 
-      light: true,
+      light: this.props.light,
       drawer: false,
     }
   }
@@ -83,6 +82,7 @@ class AppDrawer extends React.Component{
 
   render(){
     const {classes, theme} = this.props
+
     const appDrawer = (
       <div>
         <div className={classes.appDrawer}>
