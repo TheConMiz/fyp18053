@@ -120,7 +120,7 @@ class AppDrawer extends React.Component{
 
             <ToolTip title="Toggle Lights" interactive >
               <IconButton color="inherit" className={classes.lights} onClick={this.props.handleLightChange} aria-label="Toggle Lights">
-                {(!this.props.light)? <LightOff/>: <LightOn/>}
+                {(!this.props.light)? <LightOn/>: <LightOff/>}
               </IconButton>
             </ToolTip>
 
