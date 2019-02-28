@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import AppBar from '@material-ui/core/AppBar/AppBar'
 import Divider from '@material-ui/core/Divider'
@@ -105,23 +106,25 @@ class AppDrawer extends React.Component{
         <CssBaseline/>
         <AppBar className={classes.appBar}>
           <Toolbar>
-            <ToolTip title="Open Menu" interactive>
-              <IconButton color="inherit" className={classes.menuButton} aria-label="Open Menu" onClick={this.handleMenuOpen}>
-                <MenuIcon/>
-              </IconButton>
+            <ToolTip title="Open Menu" interactive placement = 'bottom-end'>
+            <div>
+            <IconButton color="inherit" className={classes.menuButton} aria-label="Open Menu" onClick={this.handleMenuOpen}>
+              <MenuIcon/>
+            </IconButton>
+            </div>
             </ToolTip>
-
+  
             <Typography variant="h6" color="inherit" noWrap className={classes.typography}>
               FYP18053
             </Typography>
 
-            <ToolTip title="Toggle Lights" interactive>
+            <ToolTip title="Toggle Lights" interactive >
               <IconButton color="inherit" className={classes.lights} onClick={this.props.handleLightChange} aria-label="Toggle Lights">
                 {(!this.props.light)? <LightOff/>: <LightOn/>}
               </IconButton>
             </ToolTip>
 
-            <ToolTip title="Account" interactive>
+            <ToolTip title="Account" interactive placement = 'bottom-start'>
               <IconButton color="inherit" className={classes.accountCircle} aria-label="My Account">
                 <AccountCircle/>
               </IconButton>
@@ -131,7 +134,7 @@ class AppDrawer extends React.Component{
         </AppBar>
         <nav className={classes.appDrawer}>
           <Hidden smUp implementation="css">
-            <SwipeableDrawer container={this.props.container} anchor="left" open={this.state.drawer} onClose={this.handleMenuOpen}>
+            <SwipeableDrawer container={this.props.container} anchor="left" open={this.state.drawer} onOpen={this.handleMenuOpen} onClose={this.handleMenuOpen}>
               {appDrawer}
             </SwipeableDrawer>
           </Hidden>
@@ -140,5 +143,9 @@ class AppDrawer extends React.Component{
     )
   }
 }
+
+AppDrawer.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles, {withTheme: true})(AppDrawer) 
