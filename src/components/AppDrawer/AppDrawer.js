@@ -17,9 +17,8 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import ListSubheader from '@material-ui/core/ListSubheader'
 import Hidden from '@material-ui/core/Hidden/Hidden'
 import ToolTip from '@material-ui/core/Tooltip/Tooltip'
-// give each thing a class name later
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const styles = theme => ({
   root: {
@@ -60,14 +59,8 @@ class AppDrawer extends React.Component{
   constructor(props){
     super(props)
     this.state = { 
-      light: this.props.light,
       drawer: false,
     }
-  }
-
-  handleLightChange = () =>{
-    this.setState(state => ({light: !this.state.light}))
-    //console.log(this.state.light)
   }
 
   handleMenuOpen = () =>{
@@ -123,8 +116,8 @@ class AppDrawer extends React.Component{
             </Typography>
 
             <ToolTip title="Toggle Lights" interactive>
-              <IconButton color="inherit" className={classes.lights} onClick={this.handleLightChange} aria-label="Toggle Lights">
-              {(!this.state.light)? <LightOff/>: <LightOn/>}
+              <IconButton color="inherit" className={classes.lights} onClick={this.props.handleLightChange} aria-label="Toggle Lights">
+                {(!this.props.light)? <LightOff/>: <LightOn/>}
               </IconButton>
             </ToolTip>
 

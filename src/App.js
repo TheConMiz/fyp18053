@@ -2,19 +2,11 @@ import React from 'react'
 import './App.css';
 import AppDrawer from './components/AppDrawer/AppDrawer'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import amber from '@material-ui/core/colors/amber'
+import lightTheme from './components/themes/lightTheme'
+import darkTheme from './components/themes/darkTheme'
 
-const theme = createMuiTheme({
-    
-        palette: {
-            primary: amber,
-            type: 'light',
-            secondary: {
-                main: '#5c6bc0',
-            },
-        },
-    }
-)
+const lTheme = createMuiTheme(lightTheme)
+const dTheme = createMuiTheme(darkTheme)
 
 class App extends React.Component {
     constructor(props){
@@ -22,15 +14,19 @@ class App extends React.Component {
         this.state = {
             light: true,
         }
+        this.handleLightChange = this.handleLightChange.bind(this)
+    }
+
+    handleLightChange = () =>{
+        this.setState(state => ({light: !this.state.light}))
     }
     
     render() {
         return ( 
             <div className = "App">
-                <MuiThemeProvider theme = {theme}>
-                    <AppDrawer/>
+                <MuiThemeProvider theme = {this.state.light ? lTheme : dTheme}>
+                    <AppDrawer handleLightChange={this.handleLightChange} light={this.state.light}/>
                 </MuiThemeProvider>
-                
            </div>
         )
     }
