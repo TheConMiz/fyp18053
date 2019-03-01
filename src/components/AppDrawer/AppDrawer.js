@@ -100,7 +100,6 @@ class AppDrawer extends React.Component{
       </div>
     )
 
-    //TODO: Lingering Tooltip upon opening and closing menu
     return(
       <div className = {classes.root}>
         <CssBaseline/>

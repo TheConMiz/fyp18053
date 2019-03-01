@@ -1,15 +1,13 @@
 import React from 'react'
 import AceEditor from 'react-ace'
-
-import 'brace/theme/tomorrow_night_blue';
+import terminal from 'brace/theme/terminal'
+import solarized_light from 'brace/theme/solarized_light'
 
 class CodeView extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            theme: "tomorrow_night_blue",
-            light: true,
-            defaultValue: "testing!"
+            value: "// This is some default text"
         }
     }
 
@@ -17,12 +15,14 @@ class CodeView extends React.Component {
         return(
             <div>
                 <AceEditor
-                    theme={this.state.theme}
-                    defaultValue={this.state.defaultValue}
+                    theme={(!this.props.light)? "terminal": "solarized_light"}
+                    highlightActiveLine={true}
+                    enableBasicAutocompletion={false}
+                    value={this.state.value}
                 />
             </div>
-        );
+        )
     }
 }
 
-export default CodeView;
+export default CodeView
