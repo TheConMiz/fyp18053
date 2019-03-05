@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css';
 import AppDrawer from './components/AppDrawer/AppDrawer'
+import SimView from './components/TuringSimView'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import lightTheme from './components/themes/lightTheme'
 import darkTheme from './components/themes/darkTheme'
@@ -18,6 +19,7 @@ class App extends React.Component {
         this.handleLightChange = this.handleLightChange.bind(this)
     }
 
+    // Handles change of theme
     handleLightChange = () =>{
         this.setState(state => ({light: !this.state.light}))
     }
@@ -26,13 +28,13 @@ class App extends React.Component {
         return ( 
             <div className = "App">
                 <MuiThemeProvider theme = {this.state.light ? lTheme : dTheme}>
-                
                     <AppDrawer handleLightChange={this.handleLightChange} light={this.state.light}/>
-
                     <div className ="CodeView">
                         <CodeView handleLightChange={this.handleLightChange} light={this.state.light}/>
                     </div>
-
+                    <div className="SimView">
+                        <SimView/>
+                    </div>
                 </MuiThemeProvider>
            </div>
         )
