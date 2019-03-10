@@ -17,8 +17,12 @@ class CodeView extends React.Component {
                 <AceEditor
                     theme={(!this.props.light)? "terminal": "solarized_light"}
                     highlightActiveLine={true}
+                    editorProps={{$blockScrolling: Infinity}}
                     enableBasicAutocompletion={false}
                     value={this.state.value}
+                    setAutoScrollEditorIntoView={true}
+                    setUseWrapMode={true}
+                    indentedSoftWrap={true}
                 />
             </div>
         )

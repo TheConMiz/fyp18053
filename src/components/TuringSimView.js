@@ -1,5 +1,6 @@
 import React from 'react'
 import * as d3 from 'd3'
+import rd3 from 'react-d3-library'
 
 class TuringSimView extends React.Component{
     componentDidMount(){
@@ -7,27 +8,30 @@ class TuringSimView extends React.Component{
     }
 
     drawChart(){
-    const data = [12, 5, 6, 6, 9, 10];
-
-    const svg = d3.select("body")
-    .append("svg")
-        .attr("width", 50)
-        .attr("height", 150)
-
-    svg.selectAll("rect")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("x", (d, i) => i * 70)
-        .attr("y", (d, i) => 20 - 10 * d)
-        .attr("width", 65)
-        .attr("height", (d, i) => d * 10)
-        .attr("fill", "green")
-    }
-
+        const data = [80, 120, 60, 150, 200];
+        const barHeight = 20;
+        const bar = d3.select('svg')
+          .selectAll('rect')
+              .data(data)
+              .enter()
+              .append('rect')
+              .attr('fill', 'blue')
+              .attr('width', function (d) {
+                  return d;
+              })
+              .attr('height', barHeight - 1)
+              .attr('transform', function (d, i) {
+                  return "translate(0," + i * barHeight + ")";
+              });
+              
+            }
 
     render(){
-        return <div className="TuringSim"></div>
+        return(
+            <div className="TuringSim">
+
+            </div>
+        )
     }
 }
 export default TuringSimView
