@@ -28,6 +28,8 @@ class App extends React.Component {
         this.handleLightChange = this.handleLightChange.bind(this)
     }
 
+    // READ UP ON LIFECYCLE METHODS
+
     // Handles change of theme from Light Mode to Dark Mode
     handleLightChange = () =>{
         this.setState(state => ({light: !this.state.light}))
@@ -42,7 +44,7 @@ class App extends React.Component {
     componentWillUpdate(nextProps, nextState){
         localStorage.setItem('light', JSON.stringify(nextState.light))
     }
-    
+
     
     render() {
         return ( 
