@@ -11,53 +11,53 @@ import IconButton from '@material-ui/core/IconButton/IconButton';
 import Toolbar from '@material-ui/core/Toolbar/Toolbar'
 import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
-import { withStyles } from '@material-ui/core/styles'
-import AccountCircle from '@material-ui/icons/AccountCircle'
+import { withStyles, createMuiTheme } from '@material-ui/core/styles'
+import SettingsIcon from '@material-ui/icons/Settings'
 import LightOn from '@material-ui/icons/WbSunny'
 import LightOff from '@material-ui/icons/WbSunnyOutlined'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import ListSubheader from '@material-ui/core/ListSubheader'
 import Hidden from '@material-ui/core/Hidden/Hidden'
 import ToolTip from '@material-ui/core/Tooltip/Tooltip'
+
 // Routing 
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
-
 const drawerWidth = 240
 
 const styles = theme => ({
-  root: {
-    display: 'flex',
-  },
-
-  menuButton: {
-    marginRight: 20,
-    marginLeft: -12,
-  },
-
-  appBar: {
-    marginLeft: drawerWidth,
-  },
-
-  typography: {
-    marginRight: 20,
-    flexGrow: 1
-  },
-
-  accountCircle: {
-    marginRight: -12
-  },
-
-  lights: {
-    margin: theme.spacing.unit,
-  },
-
-  appDrawer: {
-    [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
-      flexShrink: 0,
+    root: {
+      display: 'flex',
     },
-  }
-})
+  
+    menuButton: {
+      marginRight: 20,
+      marginLeft: -12,
+    },
+  
+    appBar: {
+      marginLeft: drawerWidth,
+    },
+  
+    typography: {
+      marginRight: 20,
+      flexGrow: 1
+    },
+  
+    settingsIcon: {
+      marginRight: -12
+    },
+  
+    lights: {
+      margin: theme.spacing.unit,
+    },
+  
+    appDrawer: {
+      [theme.breakpoints.up('sm')]: {
+        width: drawerWidth,
+        flexShrink: 0,
+      },
+    }
+  })
 
 class AppDrawer extends React.Component{
   constructor(props){
@@ -79,14 +79,13 @@ class AppDrawer extends React.Component{
 
   render(){
     const {classes, theme} = this.props
-
     const appDrawer = (
       <div>
         <div className={classes.appDrawer}>
           <List subheader={<ListSubheader component="div">FYP18053</ListSubheader>}>
             <Divider/>
-            {['Turing', 'von Neumann'].map((text, index) => (
-              <ListItem button key = {text} onClick={() => this.handleListClicks(text)}>
+            {['Turing', 'von Neumann', 'Quantum Computing'].map((text, index) => (
+              <ListItem  button key = {text} onClick={() => this.handleListClicks(text)}>
                 <ListItemText primary={text}/>
               </ListItem>
             ))}
@@ -109,26 +108,26 @@ class AppDrawer extends React.Component{
         <AppBar className={classes.appBar}>
           <Toolbar>
             <ToolTip title="Open Menu" interactive placement = 'bottom-end'>
-            <div>
-            <IconButton color="inherit" className={classes.menuButton} aria-label="Open Menu" onClick={this.handleMenuOpen}>
-              <MenuIcon/>
-            </IconButton>
+              <div>
+                <IconButton color="secondary" className={classes.menuButton} aria-label="Open Menu" onClick={this.handleMenuOpen}>
+                  <MenuIcon/>
+              </IconButton>
             </div>
             </ToolTip>
   
-            <Typography variant="h6" color="inherit" noWrap className={classes.typography}>
+            <Typography variant="h6" color="secondary" noWrap className={classes.typography}>
               FYP18053
             </Typography>
 
             <ToolTip title="Toggle Lights" interactive >
-              <IconButton color="inherit" className={classes.lights} onClick={this.props.handleLightChange} aria-label="Toggle Lights">
+              <IconButton color="secondary" className={classes.lights} onClick={this.props.handleLightChange} aria-label="Toggle Lights">
                 {(!this.props.light)? <LightOn/>: <LightOff/>}
               </IconButton>
             </ToolTip>
 
-            <ToolTip title="Account" interactive placement = 'bottom-start'>
-              <IconButton color="inherit" className={classes.accountCircle} aria-label="My Account">
-                <AccountCircle/>
+            <ToolTip title="Settings" interactive placement = 'bottom-start'>
+              <IconButton color="secondary" className={classes.settingsIcon} aria-label="My Settings">
+                <SettingsIcon/>
               </IconButton>
             </ToolTip>
             

@@ -2,10 +2,12 @@ import amber from '@material-ui/core/colors/amber'
 
 const lightTheme = {
     palette: {
-        primary: amber,
         type: 'light',
+        primary: {
+            main: '#afe2f7',
+        },
         secondary: {
-            main: '#5c6bc0',
+            main: '#002f39',
         },
     },
 

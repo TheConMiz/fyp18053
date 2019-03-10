@@ -2,15 +2,17 @@ import amber from '@material-ui/core/colors/amber'
 
 const darkTheme = {
     palette: {
-        primary: amber,
         type: 'dark',
-        secondary: {
-            main: '#5c6bc0',
-        },
-    },
 
-    typography: {
-        useNextVariants: true,
+        primary: {
+            main: '#002f39',
+        },
+        secondary: {
+            main: "#afe2f7",
+        },
+        typography: {
+            useNextVariants: true,
+        }
     },
 }
 
