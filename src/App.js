@@ -8,6 +8,7 @@ import darkTheme from './baseThemes/darkTheme'
 import CodeView from './components/CodeView/CodeView'
 import InfoCard from './components/InfoCard/InfoCard'
 import Grid from '@material-ui/core/Grid/Grid'
+import { HashRouter } from 'react-router-dom'
 
 const lTheme = createMuiTheme(lightTheme)
 const dTheme = createMuiTheme(darkTheme)
@@ -15,7 +16,6 @@ const dTheme = createMuiTheme(darkTheme)
 const styles = theme => ({
     root:{
         flexGrow: 1,
-
     }
 })
 
@@ -32,10 +32,22 @@ class App extends React.Component {
     handleLightChange = () =>{
         this.setState(state => ({light: !this.state.light}))
     }
+
+    // For remembering saved light settings
+    componentWillMount(){
+        localStorage.getItem('light') && this.setState({
+            light: JSON.parse(localStorage.getItem('light'))
+        })
+    }
+    componentWillUpdate(nextProps, nextState){
+        localStorage.setItem('light', JSON.stringify(nextState.light))
+    }
+    
     
     render() {
         return ( 
-            <div className = "App">
+            <HashRouter>
+                <div className = "App">
                 <MuiThemeProvider theme = {this.state.light ? lTheme : dTheme}>
                 <AppDrawer handleLightChange={this.handleLightChange} light={this.state.light}/>
                 <Grid container md={12}>
@@ -52,6 +64,7 @@ class App extends React.Component {
                 </Grid>
                 </MuiThemeProvider>
             </div>
+            </HashRouter>
         )
     }
 }
