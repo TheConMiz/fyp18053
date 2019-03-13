@@ -65,6 +65,7 @@ class AppDrawer extends React.Component{
     this.state = { 
       drawer: false,
     }
+
   }
 
   handleMenuOpen = () =>{
@@ -77,6 +78,7 @@ class AppDrawer extends React.Component{
     console.log(pageId)
   }
 
+  //onClick={() => this.handleListClicks(text)}
   render(){
     const {classes, theme} = this.props
     const appDrawer = (
@@ -85,7 +87,7 @@ class AppDrawer extends React.Component{
           <List subheader={<ListSubheader component="div">FYP18053</ListSubheader>}>
             <Divider/>
             {['Turing', 'von Neumann', 'Quantum Computing'].map((text, index) => (
-              <ListItem  button key = {text} onClick={() => this.handleListClicks(text)}>
+              <ListItem  button key = {text} onClick={this.handleMenuOpen}>
                 <ListItemText primary={text}/>
               </ListItem>
             ))}
@@ -93,7 +95,7 @@ class AppDrawer extends React.Component{
           <Divider/>
           <List>
             {['About Us'].map((text, index) => (
-              <ListItem button key = {text} onClick={() => this.handleListClicks(text)}>
+              <ListItem button key = {text} onClick={this.handleMenuOpen}>
                 <ListItemText primary={text}/>
               </ListItem>
             ))}

@@ -39,6 +39,7 @@ class App extends React.Component {
     componentWillMount(){
         localStorage.getItem('light') && this.setState({
             light: JSON.parse(localStorage.getItem('light'))
+            
         })
     }
     componentWillUpdate(nextProps, nextState){
