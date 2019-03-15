@@ -5,18 +5,19 @@ import github from 'brace/theme/github'
 import Paper from '@material-ui/core/Paper/Paper'
 import { withStyles, createMuiTheme } from '@material-ui/core/styles'
 import Theme from './Theme'
+import Switch from '@material-ui/core/Switch'
+import { Typography } from '@material-ui/core'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 const styles = theme => ({
     //Material UI Styling
     codeView: {
         flexGrow: 1,
-        marginLeft: 60,
-        marginTop: 90,
-        width: 520,
+        marginTop: 85,
+        marginRight: 75,
+        width: 570,
+        height: 500,
         padding: theme.spacing.unit,
-    },
-    // Ace Editor Styling
-    codeEditor: {
     },
 })
 
@@ -32,8 +33,12 @@ class CodeView extends React.Component {
         const {classes, theme} = this.props
         return(
             <div>
-                <Paper className={classes.codeView} square={false}>
+                <Paper className={classes.codeView} elevation={10}>
                     <AceEditor
+                        width="550px"
+                        height="440px"
+                        wrapEnabled={true}
+                        fontSize={14}
                         className={classes.codeEditor}
                         theme={(!this.props.light)? "solarized_dark": "github"}
                         highlightActiveLine={true}
@@ -44,8 +49,15 @@ class CodeView extends React.Component {
                         setUseWrapMode={true}
                         indentedSoftWrap={true}
                     />
-                </Paper>
+                    <FormControlLabel
+                        label="Toggle Editor Mode"
+                        labelPlacement="start"
+                        control={
+                            <Switch/>
+                        }
+                    />
 
+                </Paper>
             </div>
         )
     }

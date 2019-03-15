@@ -1,5 +1,3 @@
-import amber from '@material-ui/core/colors/amber'
-
 const darkTheme = {
     palette: {
         type: 'dark',

@@ -86,7 +86,7 @@ class AppDrawer extends React.Component{
         <div className={classes.appDrawer}>
           <List subheader={<ListSubheader component="div">FYP18053</ListSubheader>}>
             <Divider/>
-            {['Turing', 'von Neumann', 'Quantum Computing'].map((text, index) => (
+            {['Turing', 'von Neumann', 'Sorting Algorithms'].map((text, index) => (
               <ListItem  button key = {text} onClick={this.handleMenuOpen}>
                 <ListItemText primary={text}/>
               </ListItem>

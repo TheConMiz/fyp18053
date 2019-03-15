@@ -1,14 +1,12 @@
+function Turing(startState, tape, change){
+    this.state = startState
+    this.tape = tape
+    this.change = change
+}
+
+/*
 function TuringMachine(Instructions, tapeArray, endState, state, counter, cell, current)
 {
-    //I is instructions
-    /*
-    / tape is initial state of tape as a list -> contains all states,  
-    / end is end state
-    / start is start state
-    / cell is cell of tape
-    / current is current position of head
-    / initial state
-    */
     counter = 0;
     while(state != endState) {
         cell = tapeArray[counter];
@@ -21,3 +19,4 @@ function TuringMachine(Instructions, tapeArray, endState, state, counter, cell, 
     }
     return tapeArray;
 }
+*/
