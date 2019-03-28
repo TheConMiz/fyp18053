@@ -8,11 +8,11 @@ import Divider from '@material-ui/core/Divider'
 
 const styles = theme => ({
   card: {
-    marginTop: 10,
+    //marginTop: 10,
     flexGrow: 1,
     width: 570, 
-    height: 100,
-    padding: theme.spacing.unit * 1.5,
+    height: 136,
+    padding: theme.spacing.unit,
   },
 });
 
@@ -27,7 +27,7 @@ class InfoCard extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Card className={classes.card} elevation={10}>
+      <Card className={classes.card} elevation={7}>
         <Typography gutterBottom variant="h5" component="h2">
           Help Widget
         </Typography>

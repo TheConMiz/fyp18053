@@ -15,4 +15,4 @@ const lightTheme = {
 }
 
 
-export default lightTheme
+export default lightTheme;

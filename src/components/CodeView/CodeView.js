@@ -3,18 +3,17 @@ import AceEditor from 'react-ace'
 import solarized_dark from 'brace/theme/solarized_dark'
 import github from 'brace/theme/github'
 import Paper from '@material-ui/core/Paper/Paper'
-import { withStyles, createMuiTheme } from '@material-ui/core/styles'
-import Theme from './Theme'
+import {withStyles} from '@material-ui/core/styles'
 import Switch from '@material-ui/core/Switch'
-import { Typography } from '@material-ui/core'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 const styles = theme => ({
     //Material UI Styling
     codeView: {
         flexGrow: 1,
-        marginTop: 85,
-        marginRight: 75,
+        //marginTop: 85,
+        //marginRight: 75,
+        //marginLeft: 32.5,
         width: 570,
         height: 500,
         padding: theme.spacing.unit,
@@ -33,7 +32,7 @@ class CodeView extends React.Component {
         const {classes, theme} = this.props
         return(
             <div>
-                <Paper className={classes.codeView} elevation={10}>
+                <Paper className={classes.codeView} elevation={7}>
                     <AceEditor
                         width="550px"
                         height="440px"

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 // Material UI Components
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import AppBar from '@material-ui/core/AppBar/AppBar'
@@ -20,8 +19,6 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import Hidden from '@material-ui/core/Hidden/Hidden'
 import ToolTip from '@material-ui/core/Tooltip/Tooltip'
 
-// Routing 
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 const drawerWidth = 240
 
 const styles = theme => ({
@@ -65,12 +62,10 @@ class AppDrawer extends React.Component{
     this.state = { 
       drawer: false,
     }
-
   }
 
   handleMenuOpen = () =>{
     this.setState(state => ({drawer: !this.state.drawer}))
-    //console.log(this.state.drawer)
   }
 
   //TODO: ROUTING PURPOSES
@@ -78,7 +73,6 @@ class AppDrawer extends React.Component{
     console.log(pageId)
   }
 
-  //onClick={() => this.handleListClicks(text)}
   render(){
     const {classes, theme} = this.props
     const appDrawer = (
@@ -147,8 +141,4 @@ class AppDrawer extends React.Component{
   }
 }
 
-AppDrawer.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles, {withTheme: true})(AppDrawer) 
+export default withStyles(styles, {withTheme: true})(AppDrawer);
