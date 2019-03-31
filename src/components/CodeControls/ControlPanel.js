@@ -54,14 +54,6 @@ class ControlPanel extends React.Component{
         console.log(this.state.run);
     }
 
-    handleScriptMenuToggle = () => {
-
-    }
-
-    handleArrayGeneration = () => {
-        this.setState(state => ({open: !this.state.open}));
-    }
-
     render(){
         const {classes} = this.props;
 
