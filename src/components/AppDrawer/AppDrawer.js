@@ -10,14 +10,16 @@ import IconButton from '@material-ui/core/IconButton/IconButton';
 import Toolbar from '@material-ui/core/Toolbar/Toolbar'
 import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
-import { withStyles, createMuiTheme } from '@material-ui/core/styles'
-import SettingsIcon from '@material-ui/icons/Settings'
-import LightOn from '@material-ui/icons/WbSunny'
-import LightOff from '@material-ui/icons/WbSunnyOutlined'
+import {withStyles} from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import ListSubheader from '@material-ui/core/ListSubheader'
 import Hidden from '@material-ui/core/Hidden/Hidden'
 import ToolTip from '@material-ui/core/Tooltip/Tooltip'
+
+import LightSwitch from './assets/LightSwitch'
+import HelperButton from './assets/HelperButton'
+
+import {Route, Link, Switch} from 'react-router-dom';
 
 const drawerWidth = 240
 
@@ -42,10 +44,6 @@ const styles = theme => ({
   
     settingsIcon: {
       marginRight: -12
-    },
-  
-    lights: {
-      margin: theme.spacing.unit,
     },
   
     appDrawer: {
@@ -74,7 +72,9 @@ class AppDrawer extends React.Component{
   }
 
   render(){
-    const {classes, theme} = this.props
+    const {classes} = this.props
+    
+    // Pre-defined App Drawer
     const appDrawer = (
       <div>
         <div className={classes.appDrawer}>
@@ -103,32 +103,25 @@ class AppDrawer extends React.Component{
         <CssBaseline/>
         <AppBar className={classes.appBar}>
           <Toolbar>
-            <ToolTip title="Open Menu" interactive placement = 'bottom-end'>
+            <ToolTip title="Open Menu" placement = 'bottom'>
               <div>
-                <IconButton color="secondary" className={classes.menuButton} aria-label="Open Menu" onClick={this.handleMenuOpen}>
+                <IconButton color="secondary" className={classes.menuButton} onClick={this.handleMenuOpen}>
                   <MenuIcon/>
-              </IconButton>
-            </div>
+                </IconButton>
+              </div>
             </ToolTip>
   
             <Typography variant="h6" color="secondary" noWrap className={classes.typography}>
               FYP18053
             </Typography>
 
-            <ToolTip title="Toggle Lights" interactive >
-              <IconButton color="secondary" className={classes.lights} onClick={this.props.handleLightChange} aria-label="Toggle Lights">
-                {(!this.props.light)? <LightOn/>: <LightOff/>}
-              </IconButton>
-            </ToolTip>
+            <LightSwitch light={this.props.light} handleLightChange={this.props.handleLightChange}/>
 
-            <ToolTip title="Settings" interactive placement = 'bottom-start'>
-              <IconButton color="secondary" className={classes.settingsIcon} aria-label="My Settings">
-                <SettingsIcon/>
-              </IconButton>
-            </ToolTip>
+            <HelperButton helper={this.props.helper} handleHelperChange={this.props.handleHelperChange}/>
             
           </Toolbar>
         </AppBar>
+        
         <nav className={classes.appDrawer}>
           <Hidden smUp implementation="css">
             <SwipeableDrawer container={this.props.container} anchor="left" open={this.state.drawer} onOpen={this.handleMenuOpen} onClose={this.handleMenuOpen}>

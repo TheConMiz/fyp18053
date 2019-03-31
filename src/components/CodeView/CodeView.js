@@ -24,10 +24,16 @@ class CodeView extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            value: "// This is some default text"
+            value: "// This is some default text",
+            readOnly: true,
         }
+        this.handleReadOnly = this.handleReadOnly.bind(this)
     }
 
+    handleReadOnly = () =>{
+        this.setState = (state => ({readOnly: !this.state.readOnly}))
+        console.log(this.state.readOnly)
+    }
     render(){
         const {classes, theme} = this.props
         return(
@@ -42,7 +48,7 @@ class CodeView extends React.Component {
                         theme={(!this.props.light)? "solarized_dark": "github"}
                         highlightActiveLine={true}
                         editorProps={{$blockScrolling: Infinity}}
-                        enableBasicAutocompletion={false}
+                        setOptions={{enableBasicAutocompletion: false, readOnly: this.state.readOnly}}
                         value={this.state.value}
                         setAutoScrollEditorIntoView={true}
                         setUseWrapMode={true}
@@ -52,7 +58,7 @@ class CodeView extends React.Component {
                         label="Toggle Editor Mode"
                         labelPlacement="start"
                         control={
-                            <Switch/>
+                            <Switch onClick={this.handleReadOnly}/>
                         }
                     />
 
