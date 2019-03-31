@@ -50,8 +50,12 @@ const styles = theme => ({
       [theme.breakpoints.up('sm')]: {
         width: drawerWidth,
         flexShrink: 0,
-      },
+      }
+    },
+
+    sectionName: {
     }
+
   })
 
 class AppDrawer extends React.Component{

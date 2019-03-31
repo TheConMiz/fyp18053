@@ -1,8 +1,6 @@
 import React from 'react'
 
-
 import Paper from '@material-ui/core/Paper'
-import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import ToolTip from '@material-ui/core/Tooltip'
 import PlayArrow from '@material-ui/icons/PlayArrow/'
@@ -11,20 +9,9 @@ import Refresh from '@material-ui/icons/Refresh'
 import Previous from '@material-ui/icons/SkipPrevious'
 import Next from '@material-ui/icons/SkipNext'
 import { withStyles} from '@material-ui/core/styles'
-import { Typography } from '@material-ui/core';
 
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormDialogue from './SortingGenerateArray';
-import MenuItem from '@material-ui/core/MenuItem';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-
-import Divider from '@material-ui/core/Divider'
+import ArrayGenerationMenu from './ArrayGenerationMenu'
+import ScriptsViewMenu from './ScriptsViewMenu'
 
 
 const styles = theme => ({
@@ -34,9 +21,6 @@ const styles = theme => ({
 
     paper: {
         flexGrow: 1,
-        //marginLeft: 75,
-        //marginRight: 75,
-        //marginTop: 10,
         padding: theme.spacing.unit,
         width: 570,
     },
@@ -44,9 +28,16 @@ const styles = theme => ({
     contextLog: {
         padding: theme.spacing.unit,
     },
+
     button: {
         margin: theme.spacing.unit,
-      },
+    },
+
+    textField: {
+        margin: theme.spacing.unit,
+        width: 135,
+        flexGrow: 1
+    },
 })
 
 class ControlPanel extends React.Component{
@@ -72,7 +63,7 @@ class ControlPanel extends React.Component{
     }
 
     render(){
-        const {classes, theme} = this.props;
+        const {classes} = this.props;
 
         return(
             <div className={classes.root}>
@@ -101,46 +92,10 @@ class ControlPanel extends React.Component{
                         </ToolTip>
                     </IconButton>
 
-                    <Button onClick={this.handleScriptMenuToggle} variant="contained" color="primary" className={classes.button}>
-                        <Typography color="secondary">
-                            View Scripts
-                        </Typography>
-                    </Button>
+                    <ScriptsViewMenu/>
 
-                    <Button onClick={this.handleArrayGeneration} variant="contained" color="primary" className={classes.button}>
-                        <Typography color="secondary">
-                            Generate Array
-                        </Typography>
-                    </Button>
+                    <ArrayGenerationMenu/>
 
-                    <Divider/>
-                    <div className={classes.contextLog}>
-                        <Typography color="secondary">
-                            Number of Steps: <br/> 
-                                        Log: 
-                        </Typography> 
-                    </div>
-
-                    <Dialog
-                        open={this.state.open}
-                        onClose={this.handleArrayGeneration}
-                    >
-                        <DialogTitle>
-                            Generate your Array
-                        </DialogTitle>
-                        
-                        <DialogContent>
-                            <DialogContentText>
-                                You can set my maximum width and whether to adapt or not.
-                            </DialogContentText>
-            
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={this.handleArrayGeneration} color="secondary">
-                                Confirm
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
                 </Paper>
             </div>
         )
