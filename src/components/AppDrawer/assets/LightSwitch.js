@@ -15,7 +15,6 @@ const styles = theme => ({
     },
   })
 
-
 class LightSwitch extends React.Component{
   
     constructor(props){
@@ -25,14 +24,9 @@ class LightSwitch extends React.Component{
         }
     }
 
-    handleSnackBar = () => {
-      
-    }
-
     render(){
         const {classes} = this.props
         return(
-
             <ToolTip title="Toggle Lights" placement='bottom'>
             <IconButton color="secondary" className={classes.lights} onClick={this.props.handleLightChange} aria-label="Toggle Lights">
               {(!this.props.light)? <LightOn/>: <LightOff/>}

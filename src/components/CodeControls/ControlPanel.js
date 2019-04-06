@@ -1,5 +1,8 @@
 import React from 'react'
 
+import ArrayGenerationMenu from './ArrayGenerationMenu'
+import ScriptsViewMenu from './ScriptsViewMenu'
+
 import Paper from '@material-ui/core/Paper'
 import IconButton from '@material-ui/core/IconButton'
 import ToolTip from '@material-ui/core/Tooltip'
@@ -9,10 +12,6 @@ import Refresh from '@material-ui/icons/Refresh'
 import Previous from '@material-ui/icons/SkipPrevious'
 import Next from '@material-ui/icons/SkipNext'
 import { withStyles} from '@material-ui/core/styles'
-
-import ArrayGenerationMenu from './ArrayGenerationMenu'
-import ScriptsViewMenu from './ScriptsViewMenu'
-
 
 const styles = theme => ({
     root: {
@@ -45,7 +44,6 @@ class ControlPanel extends React.Component{
         super(props)
         this.state = {
             run: false,
-            open: false
         }
     }
 
@@ -86,8 +84,11 @@ class ControlPanel extends React.Component{
 
                     <ScriptsViewMenu/>
 
-                    <ArrayGenerationMenu/>
-
+                    <ArrayGenerationMenu
+                        data={this.state.data}
+                        dataSize={this.state.dataSize}
+                        handleDataChange={this.handleDataChange}/> 
+                           
                 </Paper>
             </div>
         )

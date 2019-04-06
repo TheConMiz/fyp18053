@@ -1,10 +1,8 @@
 import React from 'react'
-// Material UI Components
+//Material UI Components
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import AppBar from '@material-ui/core/AppBar/AppBar'
 import Divider from '@material-ui/core/Divider'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import IconButton from '@material-ui/core/IconButton/IconButton';
 import Toolbar from '@material-ui/core/Toolbar/Toolbar'
@@ -16,10 +14,20 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import Hidden from '@material-ui/core/Hidden/Hidden'
 import ToolTip from '@material-ui/core/Tooltip/Tooltip'
 
+import MenuList from '@material-ui/core/MenuList'
+import MenuItem from '@material-ui/core/MenuItem'
+import Grid from '@material-ui/core/Grid/Grid';
+
+import {compose} from 'recompose';
+
+//REPLACE ALL THE INDIVIDUAL IMPORTS WITH THIS
+//import {} from '@material-ui/core'
+
+
 import LightSwitch from './assets/LightSwitch'
 import HelperButton from './assets/HelperButton'
 
-import {Route, Link, Switch} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 const drawerWidth = 240
 
@@ -53,8 +61,11 @@ const styles = theme => ({
       }
     },
 
-    sectionName: {
+    pageTitle: {
+      flexGrow: 1,
+      marginLeft: -12
     }
+
 
   })
 
@@ -63,6 +74,8 @@ class AppDrawer extends React.Component{
     super(props)
     this.state = { 
       drawer: false,
+      modes: this.props.modes,
+      helper: false,
     }
   }
 
@@ -70,34 +83,36 @@ class AppDrawer extends React.Component{
     this.setState(state => ({drawer: !this.state.drawer}))
   }
 
-  //TODO: ROUTING PURPOSES
-  handleListClicks = (pageId) =>{
-    console.log(pageId)
-  }
-
   render(){
-    const {classes} = this.props
+    const {classes, modes, pathname} = this.props
     
     // Pre-defined App Drawer
     const appDrawer = (
       <div>
-        <div className={classes.appDrawer}>
-          <List subheader={<ListSubheader component="div">FYP18053</ListSubheader>}>
+        <div className={classes.appDrawer} justifyContent="center">
+          <MenuList subheader={<ListSubheader component="div">FYP18053</ListSubheader>}>
+            
             <Divider/>
-            {['Turing', 'von Neumann', 'Sorting Algorithms'].map((text, index) => (
-              <ListItem  button key = {text} onClick={this.handleMenuOpen}>
+
+            {/*Code block for mapping mode props to Menu Item names*/}
+            
+            {modes.map((text, index) => (
+              <MenuItem  button key = {text} onClick={this.handleMenuOpen} component={Link} to={text.replace(/\s/g,'_').toLowerCase()}>
                 <ListItemText primary={text}/>
-              </ListItem>
+              </MenuItem>
             ))}
-          </List>
+
+          </MenuList>
+          
           <Divider/>
-          <List>
+          
+          <MenuList>
             {['About Us'].map((text, index) => (
-              <ListItem button key = {text} onClick={this.handleMenuOpen}>
+              <MenuItem button key = {text} onClick={this.handleMenuOpen} component={Link} to={text.replace(/\s/g,'_').toLowerCase()} selected={'/about_us' === pathname}>
                 <ListItemText primary={text}/>
-              </ListItem>
+              </MenuItem>
             ))}
-          </List>
+          </MenuList>
         </div>
       </div>
     )
@@ -106,6 +121,7 @@ class AppDrawer extends React.Component{
       <div className = {classes.root}>
         <CssBaseline/>
         <AppBar className={classes.appBar}>
+
           <Toolbar>
             <ToolTip title="Open Menu" placement = 'bottom'>
               <div>
@@ -114,13 +130,13 @@ class AppDrawer extends React.Component{
                 </IconButton>
               </div>
             </ToolTip>
-  
+
             <Typography variant="h6" color="secondary" noWrap className={classes.typography}>
-              FYP18053
+              TITLE GOES HERE
             </Typography>
 
             <LightSwitch light={this.props.light} handleLightChange={this.props.handleLightChange}/>
-
+  
             <HelperButton helper={this.props.helper} handleHelperChange={this.props.handleHelperChange}/>
             
           </Toolbar>
@@ -138,4 +154,7 @@ class AppDrawer extends React.Component{
   }
 }
 
-export default withStyles(styles, {withTheme: true})(AppDrawer);
+export default compose(
+  withStyles(styles, {withTheme: true}),
+  withRouter
+) (AppDrawer);

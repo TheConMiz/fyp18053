@@ -1,44 +1,74 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
 import { withStyles} from '@material-ui/core/styles'
 
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 
-import Divider from '@material-ui/core/Divider'
 
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
     },
+
+    dialog: {
+        margin: theme.spacing.unit,
+        minWidth: 550,
+        height: 400
+    }
 })
 
 class ArrayGenerationMenu extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {
-            menuOpen: false
-        }
-    }
-
-    handleArrayGeneration = () => {
-        this.setState(state => ({open: !this.state.open}));
+        this.state = {};
     }
 
     render() {
         const {classes} = this.props;
         return(
-            <Button onClick={this.handleArrayGeneration} variant="contained" color="primary" className={classes.button}>
-                <Typography color="secondary">
-                    Generate Array
-                </Typography>
-            </Button>
+            <Fragment>                
+                
+                <Button variant="contained" color="primary" className={classes.button}>
+                    <Typography color="secondary">
+                        Generate Data
+                    </Typography>
+                </Button>
+
+                <Dialog
+                className={classes.dialog}>
+
+                    <DialogTitle>Generate Data</DialogTitle>
+
+                    <DialogContent>
+                        
+                        <TextField
+                            color="primary"
+                            placeholder="1,2,3..."
+                            label="Dataset Values"
+                            margin="normal">
+                        </TextField>
+
+                        <Button
+                            onClick={this.handleRandomisation}
+                            color="secondary">
+                                Randomise
+                        </Button>
+
+                        <Button
+                
+                            color="secondary">
+                                Confirm
+                        </Button>
+
+                    </DialogContent>
+
+                </Dialog>
+            </Fragment>
         )
     }
 }
