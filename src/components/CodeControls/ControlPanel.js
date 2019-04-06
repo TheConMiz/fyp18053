@@ -44,6 +44,7 @@ class ControlPanel extends React.Component{
         super(props)
         this.state = {
             run: false,
+            pause: false
         }
     }
 
@@ -87,7 +88,7 @@ class ControlPanel extends React.Component{
                     <ArrayGenerationMenu
                         data={this.state.data}
                         dataSize={this.state.dataSize}
-                        handleDataChange={this.handleDataChange}/> 
+                        handleRandomData={this.props.handleRandomData}/> 
                            
                 </Paper>
             </div>

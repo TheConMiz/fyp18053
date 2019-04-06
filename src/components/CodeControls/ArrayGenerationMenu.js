@@ -25,7 +25,13 @@ const styles = theme => ({
 class ArrayGenerationMenu extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            open: false,
+        };
+    }
+
+    handleMenuOpen = () => {
+        this.setState(state => ({open: !this.state.open}))
     }
 
     render() {
@@ -33,20 +39,22 @@ class ArrayGenerationMenu extends React.Component{
         return(
             <Fragment>                
                 
-                <Button variant="contained" color="primary" className={classes.button}>
+                <Button variant="contained" color="primary" className={classes.button} onClick={this.handleMenuOpen}>
                     <Typography color="secondary">
                         Generate Data
                     </Typography>
                 </Button>
 
                 <Dialog
-                className={classes.dialog}>
+                className={classes.dialog}
+                open={this.state.open}>
 
                     <DialogTitle>Generate Data</DialogTitle>
 
                     <DialogContent>
                         
                         <TextField
+                            
                             color="primary"
                             placeholder="1,2,3..."
                             label="Dataset Values"
@@ -54,15 +62,15 @@ class ArrayGenerationMenu extends React.Component{
                         </TextField>
 
                         <Button
-                            onClick={this.handleRandomisation}
+                            onClick={this.props.handleRandomData}
                             color="secondary">
                                 Randomise
                         </Button>
 
                         <Button
-                
-                            color="secondary">
-                                Confirm
+                        onClick={this.handleMenuOpen}
+                        color="secondary">
+                            Confirm
                         </Button>
 
                     </DialogContent>

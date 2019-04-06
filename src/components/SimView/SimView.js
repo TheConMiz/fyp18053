@@ -19,6 +19,8 @@ class SimView extends React.Component{
     constructor(props){
         super(props)
         this.state = {
+            width: 550,
+            height: 480,
         }
     }
     
@@ -28,7 +30,12 @@ class SimView extends React.Component{
         return(
             
             <Paper className={classes.root} elevation={7}>
-                <SortD3 className="test"></SortD3>
+                <SortD3
+                className="test"
+                width={this.state.width}
+                height={this.state.height}
+                data={this.props.data}/>
+                
                 <Divider/>
             </Paper> 
         )

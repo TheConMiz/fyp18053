@@ -7,6 +7,8 @@ import InfoCard from './temp/InfoCard/InfoCard';
 import ControlPanel from './CodeControls/ControlPanel';
 import SimView from './SimView/SimView';
 
+import * as d3 from 'd3'
+
 // Material UI Components
 import { MuiThemeProvider, createMuiTheme, withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid/Grid';
@@ -59,28 +61,39 @@ class App extends React.Component {
         console.log("Helper: " + this.state.helper);
     }
 
-    handleDataChange = () => {
-        this.setState(state => ({data: !this.state.data}));
-        console.log("Data Set: " + this.state.data);
-        this.handleDataSizeChange();
+    handleRandomData = () => {
+        // let min     = 1;
+        // let max     = 750;
+        // let length = Math.floor()
+        // let newData = new Array();
+        // for (let i = 0; i < this.state.data.length; ++i){
+
+        //     newData.push(Math.floor(Math.random() * (max - min + 1) + min))
+        // }
+        // this.setState(state => ({data: newData}));
+
+        let newData = d3.shuffle(this.state.data);
+        this.setState(state => ({data: newData}));
     }
 
-    handleDataSizeChange = () => {
-        this.setState(state => ({dataSize: this.state.data.length}))
-        console.log("Data Size: " + this.state.data);
-    }
+    handleDataShuffle = () => {
+        let data = d3.shuffle(this.state.data);
+        return data.map((d, i) => ({ id: i, value: d }));
+      }
 
     // Save Light/Dark theme, and Helper mode choice in local storage
     // Save Helper Mode choice in local storage
     componentWillMount(){
         localStorage.getItem('light') && this.setState({
             light: JSON.parse(localStorage.getItem('light')),
-            helper: JSON.parse(localStorage.getItem('helper'))
+            helper: JSON.parse(localStorage.getItem('helper')),
+            // dataset: JSON.parse(localStorage.getItem('dataset'))
         })
     }
     componentWillUpdate(nextProps, nextState){
         localStorage.setItem('light', JSON.stringify(nextState.light))
         localStorage.setItem('helper', JSON.stringify(nextState.helper))
+        // localStorage.setItem('dataset', JSON.stringify(nextState.data))
     }
     
     render() {
@@ -103,9 +116,7 @@ class App extends React.Component {
                         handleHelperChange={this.handleHelperChange} 
                         helper={this.state.helper} 
                         modes={this.state.modes}
-                    />
-
-                    
+                    />                    
 
                     <div style={{marginTop: '90px'}}></div>
 
@@ -113,11 +124,13 @@ class App extends React.Component {
                             container direction="row" 
                             justify="space-evenly" 
                             alignItems="center" 
-                            spacing={24}
-                        >
+                            spacing={24}>
 
                             <Grid item>
-                                <SimView light={this.state.light}/>
+                                <SimView
+                                light={this.state.light}
+                                data={this.state.data}
+                                />
                             </Grid>
 
                             <Grid item >
@@ -127,8 +140,7 @@ class App extends React.Component {
                             <Grid item >
                                 <ControlPanel
                                 data={this.state.data}
-                                dataSize={this.state.dataSize}
-                                handleDataChange={this.handleDataChange}/>
+                                handleRandomData={this.handleRandomData}/>
                             </Grid>
                             
                             <Grid item>

@@ -8,7 +8,6 @@ class SortD3 extends React.Component{
         super(props)
         this.state = {
             light: this.props.light,
-            data : [12, 5, 4, 8, 9, 16, 23, 12, 12, 5, 2, 8, 9, 16, 23, 12, 1, 1, 1],
         }
         this.drawChart = this.drawChart.bind(this)
     }
@@ -23,64 +22,50 @@ class SortD3 extends React.Component{
 
     drawChart(){
 
+        const variableSpacing = Math.floor(this.props.width / this.props.data.length)
+        //console.log(variableSpacing)
         const node = this.node
-        const dataMax = d3.max(this.state.data)
         const yScale = d3.scaleLinear()
-        .domain([0, dataMax])
-        .range([0, 50])
+        .domain([0, d3.max(this.props.data)])
+        .range([0, this.props.height - 10])
         
         d3.select(node)
             .selectAll('rect')
-            .data(this.state.data)
+            .data(this.props.data)
             .enter()
             .append('rect')
    
         d3.select(node)
             .selectAll('rect')
-            .data(this.state.data)
+            .data(this.props.data)
             .exit()
             .remove()
         
         d3.select(node)
             .selectAll('rect')
-            .data(this.state.data)
-            .style('fill', '#fe9922')
-            .attr('x', (d,i) => i * 25)
-            .attr('y', d => 50 - yScale(d))
+            .data(this.props.data)
+            .style('fill', 'pink')
+            .attr('x', (d,i) => i * variableSpacing)
+            .attr('y', d => this.props.height - yScale(d))
             .attr('height', d => yScale(d))
             .attr('width', 25)
+
 
             d3.select(node)
             .selectAll("rect")
             .append("svg:title")
                 .text(function(d) {return "Value: " + d})
 
-
-
-
         //TODO: EXTENT FUNCTION TO GET MIN MAX VALUES
     }
     
-    handleRandomData = () => {
-        let min     = 1;
-        let max     = 75;
-        let newData = new Array();
-        for (let i = 0; i < this.state.data.length; ++i){
-
-            newData.push(Math.floor(Math.random() * (max - min + 1) + min))
-        }
-        this.setState(state => ({data: newData}));
-    }
-    
-
     render() {
         return(
             <Fragment>
-                <svg ref={node => this.node = node} width={550} height={470} >
-                
-                </svg>
-                
-                <Button onClick={this.handleRandomData}> Hello</Button>
+                <svg
+                ref={node => this.node = node} 
+                width={this.props.width} 
+                height={this.props.height}/>
             </Fragment>
 
         ) 
