@@ -84,12 +84,13 @@ class ControlPanel extends React.Component{
                     </IconButton>
 
                     <ScriptsViewMenu/>
-
-                    <ArrayGenerationMenu
-                        data={this.state.data}
-                        dataSize={this.state.dataSize}
-                        handleRandomData={this.props.handleRandomData}/> 
-                           
+                        {this.props.currentMode === "Sorting" ? 
+                            <ArrayGenerationMenu
+                                data={this.state.data}
+                                dataSize={this.state.dataSize}
+                                handleShuffleData={this.props.handleShuffleData}/> : ""
+                            }
+                    
                 </Paper>
             </div>
         )

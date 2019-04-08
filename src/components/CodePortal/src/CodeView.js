@@ -5,15 +5,6 @@ import github from 'brace/theme/github'
 import Paper from '@material-ui/core/Paper/Paper'
 import {withStyles} from '@material-ui/core/styles'
 
-const styles = theme => ({
-    //Material UI Styling
-    codeView: {
-        flexGrow: 1,
-        width: 570,
-        height: 500,
-        padding: theme.spacing.unit,
-    },
-})
 class CodeView extends React.Component {
     constructor(props) {
         super(props)
@@ -21,23 +12,18 @@ class CodeView extends React.Component {
         }
     }
 
-    handleAceEdit = () =>{
-        var session = AceEditor.session
-    }
+    // handleAceEdit = () =>{
+    //     var session = AceEditor.session
+    // }
 
     render(){
-        const {classes} = this.props
         //console.log(this.props.match.url)
-        
         return(
-            <div>
-                <Paper className={classes.codeView} elevation={7}>
                     <AceEditor
                         width="550px"
                         height="480px"
                         wrapEnabled={true}
                         fontSize={14}
-                        className={classes.codeEditor}
                         theme={(!this.props.light)? "solarized_dark": "github"}
                         highlightActiveLine={true}
                         editorProps={{$blockScrolling: Infinity}}
@@ -52,11 +38,8 @@ class CodeView extends React.Component {
                         setUseWrapMode={true}
                         indentedSoftWrap={true}
                     />
-
-                </Paper>
-            </div>
         )
     }
 }
 
-export default withStyles(styles, {withTheme: true})(CodeView) 
+export default CodeView 

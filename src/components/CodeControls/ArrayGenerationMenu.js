@@ -16,9 +16,9 @@ const styles = theme => ({
     },
 
     dialog: {
-        margin: theme.spacing.unit,
+        margin  : theme.spacing.unit,
         minWidth: 550,
-        height: 400
+        height  : 400
     }
 })
 
@@ -26,12 +26,25 @@ class ArrayGenerationMenu extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            open: false,
+            open     : false,
+            userValue: [],
         };
     }
 
+
     handleMenuOpen = () => {
         this.setState(state => ({open: !this.state.open}))
+        // console.log(this.state.userValue)
+    }
+
+    //TODO: FIGURE OUT HOW TO ALLOW FOR USER GENERATED INT ARRAYS
+    handleDataChange = () => {
+        console.log(this.state.userValue[0])
+        // let tempArray = this.userValue.split(',');
+        // console.log(tempArray)
+        // this.props.handleNewData(this.state.userValue)
+        this.handleMenuOpen();
+
     }
 
     render() {
@@ -39,15 +52,15 @@ class ArrayGenerationMenu extends React.Component{
         return(
             <Fragment>                
                 
-                <Button variant="contained" color="primary" className={classes.button} onClick={this.handleMenuOpen}>
-                    <Typography color="secondary">
+                <Button     variant = "contained" color = "primary" className = {classes.button} onClick = {this.handleMenuOpen}>
+                <Typography color   = "secondary">
                         Generate Data
                     </Typography>
                 </Button>
 
                 <Dialog
-                className={classes.dialog}
-                open={this.state.open}>
+                    className = {classes.dialog}
+                    open      = {this.state.open}>
 
                     <DialogTitle>Generate Data</DialogTitle>
 
@@ -55,22 +68,28 @@ class ArrayGenerationMenu extends React.Component{
                         
                         <TextField
                             
-                            color="primary"
-                            placeholder="1,2,3..."
-                            label="Dataset Values"
-                            margin="normal">
+                            color       = "primary"
+                            placeholder = "eg. 1,2,3..."
+                            label       = "Dataset Values"
+                            margin      = "normal"
+                            onChange    = {val => this.setState({userValue: val.target.value.split(",")})}>
                         </TextField>
 
                         <Button
-                            onClick={this.props.handleRandomData}
-                            color="secondary">
-                                Randomise
+                            onClick = {this.props.handleShuffleData}
+                            color   = "secondary">
+                                Shuffle
                         </Button>
 
                         <Button
-                        onClick={this.handleMenuOpen}
-                        color="secondary">
-                            Confirm
+                            onClick = {this.handleDataChange}
+                            color   = "secondary">
+                                Confirm
+                        </Button>
+
+                        <Button
+                            color   = "secondary">
+                                Special Cases
                         </Button>
 
                     </DialogContent>

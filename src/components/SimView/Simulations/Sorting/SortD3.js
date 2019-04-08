@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import * as d3 from 'd3';
 
-import Button from '@material-ui/core/Button'
-
 class SortD3 extends React.Component{
     constructor(props){
         super(props)
@@ -13,7 +11,7 @@ class SortD3 extends React.Component{
     }
 
     componentDidMount() {
-        this.drawChart();
+        // this.drawChart();
     }
 
     componentDidUpdate() {
@@ -21,13 +19,13 @@ class SortD3 extends React.Component{
     }
 
     drawChart(){
+        const variableSpacing = Math.floor(this.props.width / this.props.data.length);
 
-        const variableSpacing = Math.floor(this.props.width / this.props.data.length)
-        //console.log(variableSpacing)
-        const node = this.node
+        const node = this.node;
+
         const yScale = d3.scaleLinear()
-        .domain([0, d3.max(this.props.data)])
-        .range([0, this.props.height - 10])
+            .domain([0, d3.max(this.props.data)])
+            .range([0, this.props.height - 10])
         
         d3.select(node)
             .selectAll('rect')
@@ -51,21 +49,19 @@ class SortD3 extends React.Component{
             .attr('width', 25)
 
 
-            d3.select(node)
+        d3.select(node)
             .selectAll("rect")
             .append("svg:title")
                 .text(function(d) {return "Value: " + d})
-
-        //TODO: EXTENT FUNCTION TO GET MIN MAX VALUES
     }
     
     render() {
         return(
             <Fragment>
                 <svg
-                ref={node => this.node = node} 
-                width={this.props.width} 
-                height={this.props.height}/>
+                    ref    = {node => this.node = node}
+                    width  = {this.props.width}
+                    height = {this.props.height}/>
             </Fragment>
 
         ) 

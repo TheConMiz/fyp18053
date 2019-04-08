@@ -16,13 +16,8 @@ import ToolTip from '@material-ui/core/Tooltip/Tooltip'
 
 import MenuList from '@material-ui/core/MenuList'
 import MenuItem from '@material-ui/core/MenuItem'
-import Grid from '@material-ui/core/Grid/Grid';
 
 import {compose} from 'recompose';
-
-//REPLACE ALL THE INDIVIDUAL IMPORTS WITH THIS
-//import {} from '@material-ui/core'
-
 
 import LightSwitch from './assets/LightSwitch'
 import HelperButton from './assets/HelperButton'
@@ -47,11 +42,21 @@ const styles = theme => ({
   
     typography: {
       marginRight: 20,
-      flexGrow: 1
+      flexGrow: 1,
+      align: "center",
     },
   
     settingsIcon: {
       marginRight: -12
+    },
+
+    menuItem: {
+      '&:focus': {
+        backgroundColor: theme.palette.primary.main,
+        '& $primary, & $icon': {
+          color: theme.palette.common.white,
+        },
+      },
     },
   
     appDrawer: {
@@ -60,13 +65,6 @@ const styles = theme => ({
         flexShrink: 0,
       }
     },
-
-    pageTitle: {
-      flexGrow: 1,
-      marginLeft: -12
-    }
-
-
   })
 
 class AppDrawer extends React.Component{
@@ -89,7 +87,9 @@ class AppDrawer extends React.Component{
     // Pre-defined App Drawer
     const appDrawer = (
       <div>
-        <div className={classes.appDrawer} justifyContent="center">
+
+        <div className={classes.appDrawer}>
+          
           <MenuList subheader={<ListSubheader component="div">FYP18053</ListSubheader>}>
             
             <Divider/>
@@ -97,8 +97,20 @@ class AppDrawer extends React.Component{
             {/*Code block for mapping mode props to Menu Item names*/}
             
             {modes.map((text, index) => (
-              <MenuItem  button key = {text} onClick={this.handleMenuOpen} component={Link} to={text.replace(/\s/g,'_').toLowerCase()}>
-                <ListItemText primary={text}/>
+
+              <MenuItem
+                className={classes.menuItem}
+                button key = {text} 
+                onClick={() => {
+                  this.props.handleCurrentMode(text)
+                  this.handleMenuOpen()
+                }} 
+                component={Link} 
+                selected={this.props.currentMode === text ? true : false}
+                to={text.replace(/\s/g,'_').toLowerCase()}>
+
+                  <ListItemText primary={text}/>
+              
               </MenuItem>
             ))}
 
@@ -108,8 +120,19 @@ class AppDrawer extends React.Component{
           
           <MenuList>
             {['About Us'].map((text, index) => (
-              <MenuItem button key = {text} onClick={this.handleMenuOpen} component={Link} to={text.replace(/\s/g,'_').toLowerCase()} selected={'/about_us' === pathname}>
+              <MenuItem
+                className={classes.menuItem}
+                button key = {text}
+                onClick={() => {
+                  this.props.handleCurrentMode(text)
+                  this.handleMenuOpen()
+                }} 
+                component={Link} 
+                to={text.replace(/\s/g,'_').toLowerCase()} 
+                selected={this.props.currentMode === text ? true : false}>
+                
                 <ListItemText primary={text}/>
+              
               </MenuItem>
             ))}
           </MenuList>
@@ -132,7 +155,7 @@ class AppDrawer extends React.Component{
             </ToolTip>
 
             <Typography variant="h6" color="secondary" noWrap className={classes.typography}>
-              TITLE GOES HERE
+              {this.props.currentMode.toUpperCase()}
             </Typography>
 
             <LightSwitch light={this.props.light} handleLightChange={this.props.handleLightChange}/>
@@ -149,6 +172,7 @@ class AppDrawer extends React.Component{
             </SwipeableDrawer>
           </Hidden>
         </nav>
+
       </div>
     )
   }
