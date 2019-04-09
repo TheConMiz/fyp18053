@@ -38,7 +38,6 @@ const styles = theme => ({
         flexGrow: 1
     },
 })
-
 class ControlPanel extends React.Component{
     constructor(props){
         super(props)
@@ -46,11 +45,6 @@ class ControlPanel extends React.Component{
             run: false,
             pause: false
         }
-    }
-
-    handleRunPause = () =>{
-        this.setState(state => ({run: !this.state.run}));
-        console.log(this.state.run);
     }
 
     render(){
@@ -65,9 +59,9 @@ class ControlPanel extends React.Component{
                         </ToolTip>
                     </IconButton>
                     
-                    <IconButton color="secondary" onClick={this.handleRunPause}>
-                        <ToolTip title = {(!this.state.run)? "Run": "Pause"}>
-                            {(!this.state.run)? <PlayArrow/>: <Pause/>}
+                    <IconButton color="secondary" onClick={this.props.handlePlayPause}>
+                        <ToolTip title = {(!this.props.play)? "Run": "Pause"}>
+                            {(!this.props.play)? <PlayArrow/>: <Pause/>}
                         </ToolTip>
                     </IconButton>
 
@@ -84,13 +78,10 @@ class ControlPanel extends React.Component{
                     </IconButton>
 
                     <ScriptsViewMenu/>
-                        {this.props.currentMode === "Sorting" ? 
-                            <ArrayGenerationMenu
-                                data={this.state.data}
-                                dataSize={this.state.dataSize}
-                                handleShuffleData={this.props.handleShuffleData}/> : ""
-                            }
-                    
+                        <ArrayGenerationMenu
+                            data={this.state.data}
+                            dataSize={this.state.dataSize}
+                            handleShuffleData={this.props.handleShuffleData}/>
                 </Paper>
             </div>
         )

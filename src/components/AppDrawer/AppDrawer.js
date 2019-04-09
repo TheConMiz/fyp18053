@@ -82,7 +82,7 @@ class AppDrawer extends React.Component{
   }
 
   render(){
-    const {classes, modes, pathname} = this.props
+    const {classes, modes} = this.props
     
     // Pre-defined App Drawer
     const appDrawer = (
@@ -155,7 +155,7 @@ class AppDrawer extends React.Component{
             </ToolTip>
 
             <Typography variant="h6" color="secondary" noWrap className={classes.typography}>
-              {this.props.currentMode.toUpperCase()}
+              {/* {this.props.currentMode} */}FYP18053
             </Typography>
 
             <LightSwitch light={this.props.light} handleLightChange={this.props.handleLightChange}/>

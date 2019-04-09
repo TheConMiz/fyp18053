@@ -2,13 +2,11 @@ import React from 'react';
 
 // Self-generated components
 import AppDrawer from './AppDrawer/AppDrawer';
-import CodePortal from './CodePortal/CodePortal';
-import InfoCard from './temp/InfoCard/InfoCard';
-import ControlPanel from './CodeControls/ControlPanel';
+//import CodePortal from './CodePortal/CodePortal';
+//import InfoCard from './temp/InfoCard/InfoCard';
+//import ControlPanel from './CodeControls/ControlPanel';
 import SimView from './SimView/SimView';
 import AboutUs from './AboutUs'
-
-import * as d3 from 'd3'
 
 // Material UI Components
 import { MuiThemeProvider, createMuiTheme, withStyles} from '@material-ui/core/styles';
@@ -29,22 +27,20 @@ const styles = theme => ({
 })
 
 class App extends React.Component {
-
     // Constructor for the Base App
-    constructor(props){
+    constructor(props) {
         super(props);
+        
         this.state = {
             // Prop for handling changes from Light theme to Dark theme, and vice versa
             light: true,
             // Prop for handling activation and deactivation of Helper mode
             helper: false,
             
-            data: [12, 5, 4, 8, 9, 16, 23, 12, 12, 5, 2, 8, 9, 16, 250, 12, 1, 1, 1],
             // Prop for list of pages
             modes: ["Turing", "von Neumann", "Sorting"],
 
-            currentMode: "FYP18053"
-
+            currentMode: "Sorting",
         };
 
         // Bind handlers to the App Component
@@ -64,23 +60,15 @@ class App extends React.Component {
         console.log("Helper: " + this.state.helper);
     }
 
-    // Leverage D3 library to handle shuffling of dataset
-    handleShuffleData = () => {
-        let newData = d3.shuffle(this.state.data);
-        this.setState(state => ({data: newData}));
-    }
-
-    handleNewData = (newData) => {
-        this.setState({data: newData})   
-    }
-
     // Handle modification of the currentMode prop
     handleCurrentMode = (text) => {
         this.setState({currentMode: text})
-
         // Save in local storage, so as to remember current page upon refresh
-        localStorage.setItem('currentMode', text)
+        //localStorage.setItem('currentMode', text)
+    }
 
+    handlePlayPause = () => {
+        this.setState(state => ({play: !this.state.play}));
     }
     
     // Save Light/Dark theme, and Helper mode choice in local storage
@@ -88,7 +76,7 @@ class App extends React.Component {
         localStorage.getItem('light') && this.setState({
             light: JSON.parse(localStorage.getItem('light')),
             helper: JSON.parse(localStorage.getItem('helper')),
-            currentMode: localStorage.getItem('currentMode')
+            //currentMode: localStorage.getItem('currentMode')
         })
     }
 
@@ -98,7 +86,9 @@ class App extends React.Component {
     }
     
     render() {
+
         //TODO: FIX REDIRECT TO TAG: SET IT TO CURRENT PAGE
+        
         const {classes} = this.props;
         return (
             <div className = {classes.root}>
@@ -117,14 +107,14 @@ class App extends React.Component {
                     <div style={{marginTop: '90px'}}></div>
 
                     <Switch>
-                        <Route
+                        {/* <Route
                             exact path={
                                 this.state.currentMode === "FYP18053" ? "/" : 
                                 this.state.currentMode === "Turing" ? "/turing" :
                                 this.state.currentMode === "von Neumann" ? "/von_neumann": 
                                 this.state.currentMode === "Sorting" ? "/sorting" :  "/"
-                                }
-                            render={ props => 
+                            }
+                            render={ () => 
 
                                 <Grid 
                                     container direction="row" 
@@ -135,7 +125,6 @@ class App extends React.Component {
                                     <Grid item>
                                         <SimView
                                             light={this.state.light}
-                                            data={this.state.data}
                                             currentMode={this.state.currentMode}/>
                                     </Grid>
 
@@ -151,22 +140,28 @@ class App extends React.Component {
                                             data={this.state.data}
                                             handleShuffleData={this.handleShuffleData}
                                             handleNewData={this.handleNewData}
-                                            currentMode={this.state.currentMode}/>
+                                            currentMode={this.state.currentMode}
+                                            handlePlayPause={this.handlePlayPause}
+                                            play={this.state.play}/>
                                     </Grid>
-                                    
+
                                     <Grid item>
                                         <InfoCard/>
-                                    </Grid>
-                            
+                                    </Grid>                           
                                 </Grid>
                             }>
-                        </Route>
+                        </Route> */}
+
+                        <Route exact path="/sorting" render={() => 
+
+                            <SimView/>
+                        }/>
 
                         <Route exact path="/about_us" component={AboutUs}/>
 
                         <Redirect to={
-                            
                             this.state.currentMode === "FYP18053"? "/" : this.state.currentMode.replace(/\s/g,'_').toLowerCase()}/>
+
                     </Switch>
                 </MuiThemeProvider>
             </div>                
