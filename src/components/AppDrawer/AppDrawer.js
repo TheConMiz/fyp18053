@@ -22,7 +22,14 @@ import {compose} from 'recompose';
 import LightSwitch from './assets/LightSwitch'
 import HelperButton from './assets/HelperButton'
 
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+
+import Collapse from '@material-ui/core/Collapse';
+
 import {Link, withRouter} from 'react-router-dom';
+
+import ListItem from '@material-ui/core/ListItem';
 
 const drawerWidth = 240
 
@@ -50,6 +57,10 @@ const styles = theme => ({
       marginRight: -12
     },
 
+    nestedItem: {
+      paddingLeft: theme.spacing.unit,
+    },
+
     menuItem: {
       '&:focus': {
         backgroundColor: theme.palette.primary.main,
@@ -74,11 +85,16 @@ class AppDrawer extends React.Component{
       drawer: false,
       modes: this.props.modes,
       helper: false,
+      about: false
     }
   }
 
   handleMenuOpen = () =>{
     this.setState(state => ({drawer: !this.state.drawer}))
+  }
+
+  handleAboutOpen = () => {
+    this.setState(state => ({about: !this.state.about}))
   }
 
   render(){
@@ -90,7 +106,7 @@ class AppDrawer extends React.Component{
 
         <div className={classes.appDrawer}>
           
-          <MenuList subheader={<ListSubheader component="div">FYP18053</ListSubheader>}>
+          <MenuList subheader={<ListSubheader component="div" >FYP18053</ListSubheader>}>
             
             <Divider/>
 
@@ -100,13 +116,11 @@ class AppDrawer extends React.Component{
 
               <MenuItem
                 className={classes.menuItem}
-                button key = {text} 
+                button key = {text}
                 onClick={() => {
-                  this.props.handleCurrentMode(text)
                   this.handleMenuOpen()
                 }} 
                 component={Link} 
-                selected={this.props.currentMode === text ? true : false}
                 to={text.replace(/\s/g,'_').toLowerCase()}>
 
                   <ListItemText primary={text}/>
@@ -124,17 +138,23 @@ class AppDrawer extends React.Component{
                 className={classes.menuItem}
                 button key = {text}
                 onClick={() => {
-                  this.props.handleCurrentMode(text)
-                  this.handleMenuOpen()
-                }} 
-                component={Link} 
-                to={text.replace(/\s/g,'_').toLowerCase()} 
-                selected={this.props.currentMode === text ? true : false}>
+                  this.handleAboutOpen()
+                }}>
                 
                 <ListItemText primary={text}/>
-              
+                {this.state.about ? <ExpandLess /> : <ExpandMore />}
               </MenuItem>
             ))}
+
+            {/*TODO:ABOUT US STUFF*/}
+            <Collapse in={this.state.about} timeout="auto" unmountOnExit>
+              <MenuList>
+                <ListItem className={classes.nestedItem}>
+
+                  <ListItemText primary="ABOUT ME!" />
+                </ListItem>
+              </MenuList>
+          </Collapse>
           </MenuList>
         </div>
       </div>
@@ -155,6 +175,7 @@ class AppDrawer extends React.Component{
             </ToolTip>
 
             <Typography variant="h6" color="secondary" noWrap className={classes.typography}>
+
               {/* {this.props.currentMode} */}FYP18053
             </Typography>
 
