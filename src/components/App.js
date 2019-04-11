@@ -6,9 +6,6 @@ import TuringView from './MainViews/TuringView'
 import VonNeumannView from './MainViews/VonNeumannView'
 import SortingView from './MainViews/SortingView'
 
-
-import Test from './test/Test'
-
 // Material UI Components
 import { MuiThemeProvider, createMuiTheme, withStyles} from '@material-ui/core/styles';
 
@@ -103,11 +100,6 @@ class App extends React.Component {
                             <VonNeumannView/>
                         }/>
 
-                        <Route exact path="/" render={() => 
-
-                            <Test/>
-
-                        }/>
                         <Redirect to="/"/>
 
 

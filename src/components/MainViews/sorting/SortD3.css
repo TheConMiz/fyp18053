@@ -15,3 +15,13 @@ svg text {
   rect.completed {
     fill: rgb(27, 182, 87);
   }
+
+  rect:hover {
+    opacity:0.5;
+  }
+
+  svg text.label {
+    fill:white;
+    font-weight: 400;
+    text-anchor: middle;
+  }
