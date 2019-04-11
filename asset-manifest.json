@@ -1,11 +1,13 @@
 {
-  "main.js": "/fyp18053/static/js/main.05252615.chunk.js",
-  "main.js.map": "/fyp18053/static/js/main.05252615.chunk.js.map",
+  "main.css": "/fyp18053/static/css/main.709879e1.chunk.css",
+  "main.js": "/fyp18053/static/js/main.9332de15.chunk.js",
+  "main.js.map": "/fyp18053/static/js/main.9332de15.chunk.js.map",
   "runtime~main.js": "/fyp18053/static/js/runtime~main.d09e76d8.js",
   "runtime~main.js.map": "/fyp18053/static/js/runtime~main.d09e76d8.js.map",
-  "static/js/2.e09f280e.chunk.js": "/fyp18053/static/js/2.e09f280e.chunk.js",
-  "static/js/2.e09f280e.chunk.js.map": "/fyp18053/static/js/2.e09f280e.chunk.js.map",
+  "static/js/2.bd2cb1b1.chunk.js": "/fyp18053/static/js/2.bd2cb1b1.chunk.js",
+  "static/js/2.bd2cb1b1.chunk.js.map": "/fyp18053/static/js/2.bd2cb1b1.chunk.js.map",
   "index.html": "/fyp18053/index.html",
-  "precache-manifest.221db68ed34eea8f8670fe94918ff581.js": "/fyp18053/precache-manifest.221db68ed34eea8f8670fe94918ff581.js",
-  "service-worker.js": "/fyp18053/service-worker.js"
+  "precache-manifest.b1bb7fec87631761c8634113676d9fd0.js": "/fyp18053/precache-manifest.b1bb7fec87631761c8634113676d9fd0.js",
+  "service-worker.js": "/fyp18053/service-worker.js",
+  "static/css/main.709879e1.chunk.css.map": "/fyp18053/static/css/main.709879e1.chunk.css.map"
 }
