@@ -5,7 +5,17 @@ svg text {
   }
   
   rect {
-    fill: rgb(136, 189, 230);
+    fill: #002f39;
+  }
+
+  rect:hover {
+    opacity:0.5;
+  }
+
+  svg text{
+    fill: #afe2f7;
+    font-weight: 400;
+    text-anchor: middle;
   }
   
   rect.active {
@@ -14,14 +24,4 @@ svg text {
   
   rect.completed {
     fill: rgb(27, 182, 87);
-  }
-
-  rect:hover {
-    opacity:0.5;
-  }
-
-  svg text.label {
-    fill:white;
-    font-weight: 400;
-    text-anchor: middle;
   }

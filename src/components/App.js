@@ -89,7 +89,8 @@ class App extends React.Component {
                     <Switch>
                         
                         <Route exact path="/sorting" render={() => 
-                            <SortingView/>
+                            <SortingView
+                                light={this.state.light}/>
                         }/>
 
                         <Route exact path="/turing" render={() => 

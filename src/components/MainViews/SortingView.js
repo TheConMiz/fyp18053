@@ -51,8 +51,7 @@ class SimView extends React.Component{
                     <SortD3
                         width={this.state.svgWidth}
                         height={this.state.svgHeight}
-                        data={this.state.data}
-                        swapDataOrder={this.swapDataOrder}/>         
+                        data={this.state.data}/>         
                 </Grid>
 
                 <Grid item>

@@ -13,6 +13,8 @@ import Next from '@material-ui/icons/SkipNext'
 import Button from '@material-ui/core/Button'
 import { Typography } from '@material-ui/core';
 
+import ScriptMenu from './ScriptMenu'
+
 const styles = theme => ({
     simView: {
         width : 570,
@@ -32,6 +34,18 @@ const styles = theme => ({
 })
 
 class SortControls extends React.Component{
+
+    constructor(props){
+        super(props)
+
+        this.state = {
+            scriptMenuOpen: false
+        }
+    }
+
+    scriptMenuOpen = () => {
+        this.setState({scriptMenuOpen: !this.state.scriptMenuOpen})
+    }
 
     render(){
         const {classes} = this.props
@@ -63,7 +77,10 @@ class SortControls extends React.Component{
                     </ToolTip>
                 </IconButton>
 
-                <IconButton color="secondary" className={classes.button}>
+                <IconButton
+                    color="secondary" 
+                    className={classes.button}
+                    onClick={this.props.resetBarChart}>
                     <ToolTip title = "Reset">
                         <Refresh/>
                     </ToolTip>
@@ -73,9 +90,9 @@ class SortControls extends React.Component{
                     color="primary"
                     variant="contained"
                     className={classes.button}
-                    onClick={this.props.randomiseBarChart}>
+                    onClick={this.props.shuffleBarChart}>
                         <Typography color="secondary">
-                            Randomise
+                            Shuffle
                         </Typography>
                 </Button>
 
@@ -83,17 +100,32 @@ class SortControls extends React.Component{
                     className={classes.button}
                     color="primary"
                     variant="contained"
-                    onClick={this.props.shuffleBarChart}>
+                    onClick={this.props.insertionSort}>
 
                         <Typography color="secondary">
-                            Shuffle
+                            Insertion Sort
                         </Typography>
                 </Button>
 
                 <Button
-                    className={classes.button}>
-                    Bogo Sort
+                    className={classes.button}
+                    onClick={this.props.stopLoop}>
+                    Stop Loop
                 </Button>
+
+                <Button
+                    className={classes.button}
+                    onClick={this.scriptMenuOpen}
+                    color="primary"
+                    variant="contained">
+
+                    <Typography color="secondary">
+                        Scripts
+                    </Typography>
+                </Button>
+
+                {/* {this.state.scriptMenuOpen ? <ScriptMenu scriptMenuOpen={this.state.scriptMenuOpen}/> : ""} */}
+
             </Paper>
 
 
