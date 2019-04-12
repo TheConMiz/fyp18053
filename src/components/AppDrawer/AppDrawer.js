@@ -20,7 +20,6 @@ import MenuItem from '@material-ui/core/MenuItem'
 import {compose} from 'recompose';
 
 import LightSwitch from './assets/LightSwitch'
-import HelperButton from './assets/HelperButton'
 
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -29,7 +28,8 @@ import Collapse from '@material-ui/core/Collapse';
 
 import {Link, withRouter} from 'react-router-dom';
 
-import ListItem from '@material-ui/core/ListItem';
+import { GoMarkGithub } from 'react-icons/go'
+
 
 const drawerWidth = 240
 
@@ -84,7 +84,6 @@ class AppDrawer extends React.Component{
     this.state = { 
       drawer: false,
       modes: this.props.modes,
-      helper: false,
       about: false,
     }
   }
@@ -106,7 +105,7 @@ class AppDrawer extends React.Component{
 
         <div className={classes.appDrawer}>
           
-          <MenuList subheader={<ListSubheader component="div" >FYP18053</ListSubheader>}>
+          <MenuList subheader={<ListSubheader component="div" >Learn+</ListSubheader>}>
             
             <Divider/>
 
@@ -138,7 +137,7 @@ class AppDrawer extends React.Component{
                 button
                 onClick={() => {this.handleAboutOpen()}}>
                 
-                  <ListItemText primary="About Us"/>
+                  <ListItemText primary="About"/>
                   
                   {this.state.about ? <ExpandLess /> : <ExpandMore />}
               
@@ -147,10 +146,12 @@ class AppDrawer extends React.Component{
             {/*TODO:ABOUT US STUFF*/}
             <Collapse in={this.state.about} timeout="auto" unmountOnExit>
               <MenuList>
-                <ListItem className={classes.nestedItem}>
-
-                  <ListItemText primary="ABOUT ME!" />
-                </ListItem>
+                <MenuItem
+                  className={classes.nestedItem}
+                  component="a" target="_blank" href="https://github.com/TheConMiz/fyp18053">
+                    <GoMarkGithub/>
+                    <ListItemText primary="View Repository" inset></ListItemText>
+                </MenuItem>
               </MenuList>
           </Collapse>
           </MenuList>
@@ -177,8 +178,6 @@ class AppDrawer extends React.Component{
             </Typography>
 
             <LightSwitch light={this.props.light} handleLightChange={this.props.handleLightChange}/>
-  
-            <HelperButton helper={this.props.helper} handleHelperChange={this.props.handleHelperChange}/>
             
           </Toolbar>
         </AppBar>

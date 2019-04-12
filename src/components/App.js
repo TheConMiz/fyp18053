@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 
 // Self-generated components
-import AppDrawer from './AppDrawer/AppDrawer';
+import AppDrawer from './AppDrawer/AppDrawer'
 import TuringView from './MainViews/TuringView'
 import VonNeumannView from './MainViews/VonNeumannView'
 import SortingView from './MainViews/SortingView'
 
+
 // Material UI Components
-import { MuiThemeProvider, createMuiTheme, withStyles} from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme, withStyles} from '@material-ui/core/styles'
 
 // Base Theme settings
-import {lightTheme, darkTheme} from './themes';
-import {Route, Switch, Redirect} from 'react-router-dom';
-import { Typography } from '@material-ui/core';
+import {lightTheme, darkTheme} from './themes'
+import {Route, Switch} from 'react-router-dom'
 
-const lTheme = createMuiTheme(lightTheme);
-const dTheme = createMuiTheme(darkTheme);
+const lTheme = createMuiTheme(lightTheme)
+const dTheme = createMuiTheme(darkTheme)
 
 const styles = theme => ({
     root: {
@@ -26,40 +26,23 @@ const styles = theme => ({
 class App extends React.Component {
     // Constructor for the Base App
     constructor(props) {
-        super(props);
+        super(props)
         
         this.state = {
             // Prop for handling changes from Light theme to Dark theme, and vice versa
-            light: true,
-            // Prop for handling activation and deactivation of Helper mode
-            helper: false,
-            
+            light: true,            
             // Prop for list of pages
             modes: ["Turing Machine", "von Neumann Architecture", "Sorting Algorithms"],
-
-            currentMode: "Learn+"
-        };
+        }
 
         // Bind handlers to the App Component
         this.handleLightChange = this.handleLightChange.bind(this)
-        this.changeCurrentMode = this.changeCurrentMode.bind(this)
     }
 
     // Handles change of theme from Light Mode to Dark Mode
     handleLightChange = () =>{
-        this.setState(state => ({light: !this.state.light}));
-        console.log("Light: " + this.state.light);
-    }
-
-    // Handles (de)activation of Helper Mode
-    handleHelperChange = () =>{
-        this.setState(state => ({helper: !this.state.helper}));
-        console.log("Helper: " + this.state.helper);
-    }
-
-    // Handles display of correct header upon changing page
-    changeCurrentMode = (newMode) => {
-        this.setState({currentMode: newMode})
+        this.setState(state => ({light: !this.state.light}))
+        console.log("Light: " + this.state.light)
     }
 
     componentWillMount(){
@@ -74,7 +57,7 @@ class App extends React.Component {
     
     render() {
         
-        const {classes} = this.props;
+        const {classes} = this.props
         return (
             
             <div className = {classes.root}>
@@ -82,9 +65,7 @@ class App extends React.Component {
                 <MuiThemeProvider theme = {this.state.light ? lTheme : dTheme}>
 
                     <AppDrawer
-                        handleHelperChange={this.handleHelperChange} 
                         handleLightChange={this.handleLightChange} 
-                        helper={this.state.helper} 
                         light={this.state.light} 
                         modes={this.state.modes}
                     /> 
@@ -105,10 +86,6 @@ class App extends React.Component {
                         <Route exact path="/von_neumann_architecture" render={() => 
                             <VonNeumannView/>
                         }/>
-
-                        <Redirect to="/"/>
-
-
                     </Switch>
                 </MuiThemeProvider>
             </div>                
@@ -116,4 +93,4 @@ class App extends React.Component {
     }
 }
 
-export default withStyles(styles)(App);
+export default withStyles(styles)(App)

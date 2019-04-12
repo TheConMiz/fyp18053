@@ -51,7 +51,6 @@ class CodeView extends React.Component {
                     setUseWrapMode={true}
                     indentedSoftWrap={true}
                 />
-
             </Paper>
 
         )
