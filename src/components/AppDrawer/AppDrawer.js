@@ -85,7 +85,7 @@ class AppDrawer extends React.Component{
       drawer: false,
       modes: this.props.modes,
       helper: false,
-      about: false
+      about: false,
     }
   }
 
@@ -133,18 +133,16 @@ class AppDrawer extends React.Component{
           <Divider/>
           
           <MenuList>
-            {['About Us'].map((text, index) => (
-              <MenuItem
+            <MenuItem
                 className={classes.menuItem}
-                button key = {text}
-                onClick={() => {
-                  this.handleAboutOpen()
-                }}>
+                button
+                onClick={() => {this.handleAboutOpen()}}>
                 
-                <ListItemText primary={text}/>
-                {this.state.about ? <ExpandLess /> : <ExpandMore />}
+                  <ListItemText primary="About Us"/>
+                  
+                  {this.state.about ? <ExpandLess /> : <ExpandMore />}
+              
               </MenuItem>
-            ))}
 
             {/*TODO:ABOUT US STUFF*/}
             <Collapse in={this.state.about} timeout="auto" unmountOnExit>
@@ -175,8 +173,7 @@ class AppDrawer extends React.Component{
             </ToolTip>
 
             <Typography variant="h6" color="secondary" noWrap className={classes.typography}>
-
-              {/* {this.props.currentMode} */}FYP18053
+              Learn+
             </Typography>
 
             <LightSwitch light={this.props.light} handleLightChange={this.props.handleLightChange}/>

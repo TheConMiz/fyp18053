@@ -2,6 +2,7 @@ import React from 'react'
 import AceEditor from 'react-ace'
 import solarized_dark from 'brace/theme/solarized_dark'
 import github from 'brace/theme/github'
+import javascript from 'brace/mode/javascript'
 import Paper from '@material-ui/core/Paper/Paper'
 import {withStyles} from '@material-ui/core/styles'
 
@@ -17,13 +18,16 @@ const styles = theme => ({
 
 
 class CodeView extends React.Component {
-    constructor(props) {
+    constructor(props){
         super(props)
+
         this.state = {
+            value:
+`function bubbleSort() {
+    console.log(test);
+}`
         }
     }
-
-
 
     render(){
         const {classes} = this.props
@@ -34,17 +38,15 @@ class CodeView extends React.Component {
                     width="550px"
                     height="480px"
                     wrapEnabled={true}
-                    fontSize={14}
+                    onLoad={this.onLoad}
+                    onChange={this.onChange}
+                    mode="javascript"
+                    fontSize={18}
                     theme={(!this.props.light)? "solarized_dark": "github"}
                     highlightActiveLine={true}
                     editorProps={{$blockScrolling: Infinity}}
                     readOnly={true}
-                    // value={
-                    //     // this.props.match.url === "/turing" ? "The Turing Machine": 
-                    //     // this.props.match.url === "/von_neumann"? "The von Neumann Architecture" :
-                    //     // this.props.match.url === "/sorting" ? "Sorting Algorithms": 
-                    //     // ""
-                    //  }
+                    value={"// " + this.props.currentScript + " Sort"}
                     setAutoScrollEditorIntoView={true}
                     setUseWrapMode={true}
                     indentedSoftWrap={true}

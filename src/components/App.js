@@ -12,6 +12,7 @@ import { MuiThemeProvider, createMuiTheme, withStyles} from '@material-ui/core/s
 // Base Theme settings
 import {lightTheme, darkTheme} from './themes';
 import {Route, Switch, Redirect} from 'react-router-dom';
+import { Typography } from '@material-ui/core';
 
 const lTheme = createMuiTheme(lightTheme);
 const dTheme = createMuiTheme(darkTheme);
@@ -34,12 +35,14 @@ class App extends React.Component {
             helper: false,
             
             // Prop for list of pages
-            modes: ["Turing", "von Neumann", "Sorting"],
+            modes: ["Turing Machine", "von Neumann Architecture", "Sorting Algorithms"],
+
+            currentMode: "Learn+"
         };
 
         // Bind handlers to the App Component
-        this.handleLightChange = this.handleLightChange.bind(this);
-        this.handleHelperChange = this.handleHelperChange.bind(this);
+        this.handleLightChange = this.handleLightChange.bind(this)
+        this.changeCurrentMode = this.changeCurrentMode.bind(this)
     }
 
     // Handles change of theme from Light Mode to Dark Mode
@@ -54,17 +57,19 @@ class App extends React.Component {
         console.log("Helper: " + this.state.helper);
     }
 
-    // Save Light/Dark theme, and Helper mode choice in local storage
+    // Handles display of correct header upon changing page
+    changeCurrentMode = (newMode) => {
+        this.setState({currentMode: newMode})
+    }
+
     componentWillMount(){
         localStorage.getItem('light') && this.setState({
             light: JSON.parse(localStorage.getItem('light')),
-            helper: JSON.parse(localStorage.getItem('helper')),
-        })
+        })        
     }
 
     componentWillUpdate(nextProps, nextState){
         localStorage.setItem('light', JSON.stringify(nextState.light))
-        localStorage.setItem('helper', JSON.stringify(nextState.helper))
     }
     
     render() {
@@ -85,19 +90,19 @@ class App extends React.Component {
                     /> 
 
                     <div style={{marginTop: '90px'}}></div>
-
+                    
                     <Switch>
                         
-                        <Route exact path="/sorting" render={() => 
+                        <Route exact path="/sorting_algorithms" render={() =>                        
                             <SortingView
                                 light={this.state.light}/>
                         }/>
 
-                        <Route exact path="/turing" render={() => 
+                        <Route exact path="/turing_machine" render={() => 
                             <TuringView/>
                         }/>
 
-                        <Route exact path="/von_neumann" render={() => 
+                        <Route exact path="/von_neumann_architecture" render={() => 
                             <VonNeumannView/>
                         }/>
 
