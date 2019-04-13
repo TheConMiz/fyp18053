@@ -98,6 +98,7 @@ class TuringControls extends React.Component{
                     color="secondary"
                     onClick={() => {
                         this.props.setPlay()
+                        this.props.startMachine()
                     }}
                     disabled={this.props.play}>
                     <ToolTip title = "Start">

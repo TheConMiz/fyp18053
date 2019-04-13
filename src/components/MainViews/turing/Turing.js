@@ -9,8 +9,6 @@ import CodeView from './CodeView'
 
 import TuringTape from './TuringTape'
 
-// import Controls from './Controls'
-
 const styles = theme => ({
     controlPaper: {
         width : 570,
@@ -27,8 +25,8 @@ class Turing extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            scriptList: ["Endless 1/0s", "Increment by 1", "Divisible by 3", "Palindrome Detection"],
-            currentScript: "Endless 1/0s",
+            scriptList: ["Divisible by 3", "Endless 1/0s", "Increment by 1", "Palindrome Detection"],
+            currentScript: "Divisible by 3",
 
             moveList: ["right", "left"],
 
@@ -50,7 +48,7 @@ class Turing extends React.Component{
             currentState: "q0",
 
             tapeArray: ["0","0","0","0","0","0","0","0","0","0"],
-            startTapePosition: 0,
+            tapePosition: 4,
             play: false,
         }
     }
@@ -178,6 +176,23 @@ class Turing extends React.Component{
         
     }
 
+    startMachine = () => {
+        
+        let temp = this.state.instructions.slice()
+        
+        let currentInstruction = temp.find((element) => element.currentState === this.state.currentState)
+
+        if (currentInstruction.ifRead === this.state.tapeArray[this.state.tapePosition]) {
+            
+            let temp = this.state.tapeArray.slice();
+
+            temp[this.state.tapePosition] = currentInstruction.write
+
+            this.setState({currentState: currentInstruction.goTo})
+        }
+
+    }
+
 
 
     render(){
@@ -189,8 +204,8 @@ class Turing extends React.Component{
                 justify="space-evenly"
                 alignItems="center"
                 spacing={24}>
-
-                <Grid item>
+                
+                <Grid>
                     <TuringTape
                         dataList={this.state.dataList}
                         instructions={this.state.instructions}
@@ -198,10 +213,19 @@ class Turing extends React.Component{
                         moveList={this.state.moveList}
                         tapeArray={this.state.tapeArray}
                         changeCell={this.changeCell}
-                        startTapePosition={this.state.startTapePosition}/>
+                        tapePosition={this.state.tapePosition}
+                        play={this.state.play}/>
                 </Grid>
 
-                    <Grid item>
+                <Grid item>
+                    
+                    <CodeView
+                        light={this.props.light}
+                        currentScript={this.state.currentScript}/>
+                </Grid> 
+
+                <Grid item>
+                    <div>
                         <TuringControls
                             dataList={this.state.dataList}
                             addData={this.addData}
@@ -227,10 +251,11 @@ class Turing extends React.Component{
                             palindromeSetter={this.palindromeSetter}
 
                             setPlay={this.setPlay}
-                            play={this.state.play}/>
-                    </Grid>
-
-                    <Grid item>
+                            play={this.state.play}
+                            startMachine={this.startMachine}/>
+                        
+                        <div style={{marginTop: '24px'}}></div>
+                    
                         <Paper
                             className={classes.controlPaper}
                             elevation={7}>
@@ -244,26 +269,9 @@ class Turing extends React.Component{
                             </Typography>
 
                         </Paper>
-                    </Grid>
-
-                <Grid
-                container
-                direction="column"
-                justify="space-evenly"
-                alignItems="center"
-                spacing={24}>
-                    
-                    <Grid item>
-                        <CodeView
-                            light={this.props.light}
-                            currentScript={this.state.currentScript}/>
-                    </Grid> 
-                
+                    </div>
                 </Grid>
-
-
             </Grid>
-
         )
     }
 }

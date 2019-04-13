@@ -37,10 +37,10 @@ class TuringTape extends React.Component {
                 {this.props.tapeArray.map((text, id) => (
                     <Button
                         className={classes.button}
-                        key={id} 
-                        color={id === this.props.startTapePosition ? "primary": "secondary"}
+                        key={id}
+                        color={id === this.props.tapePosition ? "primary": "secondary"}
                         variant="contained"
-                        onClick={() => this.props.changeCell(id)}>
+                        onClick={() => !this.props.play ? this.props.changeCell(id): console.log("Tape Locked")}>
                             {text === "blank" ? "" : text}
                         </Button>
                 ))}
