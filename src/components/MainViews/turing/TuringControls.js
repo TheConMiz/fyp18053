@@ -110,6 +110,7 @@ class TuringControls extends React.Component{
                     color="secondary"
                     onClick={()=> {
                         this.props.setPlay(false)
+                        this.props.setError(false)
                         this.props.currentScript === "Endless 1/0s" ? this.props.endless10Setter():
                         this.props.currentScript === "Increment by 1" ? this.props.incrementOneSetter():
                         this.props.currentScript === "Ping-Pong" ? this.props.genericSetter(): console.log("Nothing to set")
