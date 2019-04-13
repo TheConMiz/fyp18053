@@ -22,7 +22,7 @@ class CodeView extends React.Component {
         super(props)
 
         this.state = {
-            value: "TURING"
+            // value: "TURING"
         }
     }
 
@@ -43,7 +43,7 @@ class CodeView extends React.Component {
                     highlightActiveLine={true}
                     editorProps={{$blockScrolling: Infinity}}
                     readOnly={true}
-                    value={"// " + "Turing Machine"}
+                    // value={"// " + "Turing Machine"}
                     setAutoScrollEditorIntoView={true}
                     setUseWrapMode={true}
                     indentedSoftWrap={true}

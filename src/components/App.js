@@ -82,7 +82,8 @@ class App extends React.Component {
                         }/>
 
                         <Route exact path="/turing_machine" render={() => 
-                            <TuringView/>
+                            <TuringView
+                                light={this.state.light}/>
                         }/>
 
                         <Route exact path="/von_neumann_architecture" render={() => 

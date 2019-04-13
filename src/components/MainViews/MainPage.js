@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
-import Typist from 'react-typist';
-import './MainPage.scss';
+import React from 'react'
+import Typist from 'react-typist'
+import './mainPage/MainPage.scss'
 
 import {withStyles} from '@material-ui/core/styles'
 

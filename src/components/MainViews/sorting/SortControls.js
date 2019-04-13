@@ -155,8 +155,7 @@ class SortControls extends React.Component{
                             <RadioGroup
                                 name="scriptsMenu"
                                 className={classes.radio}
-
-                                
+                                value={this.props.currentScript}
                                 onChange={(event) => this.props.setScript(event.target.value)}>
                                     {this.props.scripts.map((text, index) => (
                                         <FormControlLabel value={text} key={index} control={<Radio color="secondary"/>} label={text + " Sort"}/>

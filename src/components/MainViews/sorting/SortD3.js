@@ -413,8 +413,7 @@ class SortD3 extends React.Component{
                 direction="row"
                 justify="space-evenly"
                 alignItems="center"
-                spacing={24}
-                className={cssStyles}>
+                spacing={24}>
 
                 <Grid item>
                     <Paper
@@ -473,7 +472,7 @@ class SortD3 extends React.Component{
                             References
                         </Typography>
 
-                        <Typography>
+                        <Typography component="a" target="_blank" href="https://www.google.com">
                             THIS IS SOME TEXT
                         </Typography>
 
