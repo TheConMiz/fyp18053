@@ -28,10 +28,10 @@ class Turing extends React.Component{
         super(props)
         this.state = {
             scriptList: ["Endless 1/0s", "Increment by 1", "Divisible by 3", "Palindrome Detection"],
-
             currentScript: "Endless 1/0s",
 
             moveList: ["right", "left"],
+
             instructions: [
                 {
                     "currentState": "q0",
@@ -43,7 +43,15 @@ class Turing extends React.Component{
             ],
 
             dataList: ["0", "1", "blank"],
+
             stateList: ["q0", "q1"],
+            startState: "q0",
+            
+            currentState: "q0",
+
+            tapeArray: ["0","0","0","0","0","0","0","0","0","0"],
+            startTapePosition: 0,
+            play: false,
         }
     }
 
@@ -62,16 +70,22 @@ class Turing extends React.Component{
     }
 
     setScript = (newScript) => {
+
+        
+        newScript === "Endless 1/0s" ? this.endless10Setter():
+        newScript === "Increment by 1" ? this.incrementOneSetter():
+        newScript === "Divisible by 3" ? this.divisibleByThreeSetter():
+        newScript === "Palindrome Detection" ? this.palindromeSetter():
+        
+        console.log("No Script set")
+
         this.setState({currentScript: newScript})
-
-
 
         console.log(this.state.currentScript)
     }
 
     addInstruction = () => {
         let tempInstructions = this.state.instructions.slice()
-        
         let newInstruction={
             "currentState": "q0",
             "ifRead": "blank",
@@ -80,12 +94,7 @@ class Turing extends React.Component{
             "moveTape": "right"
         }
         
-        // console.log(newInstruction)
-
-        tempInstructions.push(newInstruction)
-
-        // console.log(tempInstructions)
-        
+        tempInstructions.push(newInstruction)   
         this.setState({instructions: tempInstructions})
     }
 
@@ -97,19 +106,28 @@ class Turing extends React.Component{
     }
 
     setInstruction = (newObject, id) => {
-        // console.log(newObject)
-        // console.log(id)
-
         let tempInstructions = this.state.instructions.slice()
         tempInstructions[id] = newObject
-
-        // console.log(tempInstructions)
-
         this.setState({instructions: tempInstructions})
 
     }
 
-    endless10 = () => {
+    changeCell = (cellId) => {
+        console.log(cellId)
+        let tempTape = this.state.tapeArray.slice()
+        
+        tempTape[cellId] === "0" ? tempTape[cellId] = "1" : 
+        tempTape[cellId] === "1" ? tempTape[cellId] = "blank" :
+        tempTape[cellId] = "0"
+
+        this.setState({tapeArray: tempTape})
+    }
+
+    setPlay = () => {
+        this.setState({play: !this.state.play})
+    } 
+
+    endless10Setter = () => {
         this.setState({stateList: ["q0", "q1", "q2", "q3"]})
         this.setState({instructions: [
             {
@@ -140,7 +158,24 @@ class Turing extends React.Component{
                 "goTo": "q0",
                 "moveTape": "right"
             },
-        ]})        
+        ]})     
+        this.setState({tapeArray: ["blank","blank","blank","blank","blank","blank","blank","blank","blank","blank"]})
+
+        this.setState({startState: "q0"})
+        this.setState({currentState: "q0"})
+
+    }
+
+    incrementOneSetter = () => {
+        this.setState({stateList: ["q0", "q1", "q2", "q3"]})
+    }
+
+    divisibleByThreeSetter = () => {
+
+    }
+
+    palindromeSetter = () => {
+        
     }
 
 
@@ -157,53 +192,76 @@ class Turing extends React.Component{
 
                 <Grid item>
                     <TuringTape
-                        dataTypes={this.state.dataTypes}/>
-                </Grid>
-
-                <Grid item>
-                    <CodeView
-                        light={this.props.light}
-                        currentScript={this.state.currentScript}/>
-                </Grid>
-
-                <Grid item>
-                    <TuringControls
                         dataList={this.state.dataList}
-                        addData={this.addData}
-                        removeData={this.removeData}
-
-                        scriptList={this.state.scriptList}
-                        currentScript={this.state.currentScript}
-                        setScript={this.setScript}
-
-                        stateList={this.state.stateList}
-                        addStates={this.addStates}
-                        removeStates={this.removeStates}
-
-                        moveList={this.state.moveList}
                         instructions={this.state.instructions}
-                        addInstruction={this.addInstruction}
-                        removeInstruction={this.removeInstruction}
-                        setInstruction={this.setInstruction}
-                        
-                        />
+                        currentScript={this.state.currentScript}
+                        moveList={this.state.moveList}
+                        tapeArray={this.state.tapeArray}
+                        changeCell={this.changeCell}
+                        startTapePosition={this.state.startTapePosition}/>
                 </Grid>
 
-                <Grid item>
-                    <Paper
-                        className={classes.controlPaper}
-                        elevation={7}>
+                    <Grid item>
+                        <TuringControls
+                            dataList={this.state.dataList}
+                            addData={this.addData}
+                            removeData={this.removeData}
 
-                        <Typography color="secondary" variant="h5" gutterBottom>
-                            References
-                        </Typography>
+                            scriptList={this.state.scriptList}
+                            currentScript={this.state.currentScript}
+                            setScript={this.setScript}
 
-                        <Typography component="a" target="_blank" href="https://www.google.com">
-                            THIS IS SOME TEXT
-                        </Typography>
+                            stateList={this.state.stateList}
+                            addStates={this.addStates}
+                            removeStates={this.removeStates}
 
-                    </Paper>
+                            moveList={this.state.moveList}
+                            instructions={this.state.instructions}
+                            addInstruction={this.addInstruction}
+                            removeInstruction={this.removeInstruction}
+                            setInstruction={this.setInstruction}
+                            
+                            endless10Setter={this.endless10Setter}
+                            incrementOneSetter={this.incrementOneSetter}
+                            divisibleByThreeSetter={this.divisibleByThreeSetter}
+                            palindromeSetter={this.palindromeSetter}
+
+                            setPlay={this.setPlay}
+                            play={this.state.play}/>
+                    </Grid>
+
+                    <Grid item>
+                        <Paper
+                            className={classes.controlPaper}
+                            elevation={7}>
+
+                            <Typography color="secondary" variant="h5" gutterBottom>
+                                References
+                            </Typography>
+
+                            <Typography component="a" target="_blank" href="https://www.google.com">
+                                THIS IS SOME TEXT
+                            </Typography>
+
+                        </Paper>
+                    </Grid>
+
+                <Grid
+                container
+                direction="column"
+                justify="space-evenly"
+                alignItems="center"
+                spacing={24}>
+                    
+                    <Grid item>
+                        <CodeView
+                            light={this.props.light}
+                            currentScript={this.state.currentScript}/>
+                    </Grid> 
+                
                 </Grid>
+
+
             </Grid>
 
         )

@@ -95,14 +95,20 @@ class TuringControls extends React.Component{
                 elevation={7}>
 
                 <IconButton
-                    color="secondary">
+                    color="secondary"
+                    onClick={() => {
+                        this.props.setPlay()
+                    }}
+                    disabled={this.props.play}>
                     <ToolTip title = "Start">
                         <PlayArrow/>
                     </ToolTip>
                 </IconButton>
 
                 <IconButton
-                    color="secondary">
+                    color="secondary"
+                    disabled={!this.props.play}
+                    onClick={this.props.setPlay}>
                     <ToolTip title = "Stop">
                         <Stop/>
                     </ToolTip>
