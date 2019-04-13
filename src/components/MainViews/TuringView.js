@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Turing from './turing/Turing'
 
 class TuringView extends React.Component{
@@ -13,6 +12,7 @@ class TuringView extends React.Component{
 
     render(){
         return(
+
             <Turing
                 width={this.state.svgWidth}
                 height={this.state.svgHeight}

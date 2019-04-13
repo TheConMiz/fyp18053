@@ -9,7 +9,7 @@ import Stop from '@material-ui/icons/Stop'
 import Refresh from '@material-ui/icons/Refresh'
 
 import Button from '@material-ui/core/Button'
-import { Typography} from '@material-ui/core'
+import { Typography, FormGroup} from '@material-ui/core'
 
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
@@ -27,6 +27,7 @@ import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
 import Input from '@material-ui/core/Input'
 import MenuItem from '@material-ui/core/MenuItem'
+
 
 const styles = theme => ({
     controlPaper: {
@@ -97,7 +98,6 @@ class TuringControls extends React.Component{
                 <IconButton
                     color="secondary"
                     onClick={() => {
-                        this.props.setPlay()
                         this.props.startMachine()
                     }}
                     disabled={this.props.play}>
@@ -105,18 +105,15 @@ class TuringControls extends React.Component{
                         <PlayArrow/>
                     </ToolTip>
                 </IconButton>
-
-                <IconButton
-                    color="secondary"
-                    disabled={!this.props.play}
-                    onClick={this.props.setPlay}>
-                    <ToolTip title = "Stop">
-                        <Stop/>
-                    </ToolTip>
-                </IconButton>
                         
                 <IconButton
-                    color="secondary">
+                    color="secondary"
+                    onClick={()=> {
+                        this.props.setPlay(false)
+                        this.props.currentScript === "Endless 1/0s" ? this.props.endless10Setter():
+                        this.props.currentScript === "Increment by 1" ? this.props.incrementOneSetter():
+                        this.props.currentScript === "Ping-Pong" ? this.props.genericSetter(): console.log("Nothing to set")
+                    }}>
                     <ToolTip title = "Reset">
                         <Refresh/>
                     </ToolTip>
@@ -292,9 +289,9 @@ class TuringControls extends React.Component{
                                         </InputLabel>
 
                                         <Select
-                                            value={object.currentState}
+                                            value={object.state}
                                             onChange={(event) => {
-                                                object.currentState = event.target.value
+                                                object.state = event.target.value
                                                 this.props.setInstruction(object, id)}}
                                             input={<Input name="state" id="state" />}
                                             >
@@ -437,21 +434,14 @@ class TuringControls extends React.Component{
                     </Button>
                 </Dialog>
 
-                {/* <TextField
-                    id="speed"
-                    label="Set Speed"
-                    type="number"
-                    className={classes.textField}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    value={this.props.speed}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={(event) => this.props.setSpeed(event.target.value)}
-                    disabled={this.props.play}
-                    helperText="The smaller, the quicker!">
-                </TextField> */}
+                {this.props.error ? 
+                    <Typography 
+                        className={classes.typography} 
+                        color="secondary" 
+                        variant="h7">
+                            Possible Error: Check the instructions, and click Reset
+                        </Typography>: ""}
+                
             </Paper>
         )
     }

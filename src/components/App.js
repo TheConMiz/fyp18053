@@ -8,13 +8,13 @@ import SortingView from './MainViews/SortingView'
 
 import MainPage from './MainViews/MainPage'
 
-
 // Material UI Components
 import { MuiThemeProvider, createMuiTheme, withStyles} from '@material-ui/core/styles'
 
 // Base Theme settings
 import {lightTheme, darkTheme} from './themes'
 import {Route, Switch} from 'react-router-dom'
+
 
 const lTheme = createMuiTheme(lightTheme)
 const dTheme = createMuiTheme(darkTheme)
@@ -61,7 +61,7 @@ class App extends React.Component {
         
         const {classes} = this.props
         return (
-            
+          
             <div className = {classes.root}>
         
                 <MuiThemeProvider theme = {this.state.light ? lTheme : dTheme}>
@@ -73,7 +73,6 @@ class App extends React.Component {
                     /> 
 
                     <div style={{marginTop: '90px'}}></div>
-                    
                     <Switch>
                         
                         <Route exact path="/sorting_algorithms" render={() =>                        
@@ -95,7 +94,7 @@ class App extends React.Component {
                         }/>
                     </Switch>
                 </MuiThemeProvider>
-            </div>                
+            </div>             
         )
     }
 }

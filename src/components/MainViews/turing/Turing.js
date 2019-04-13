@@ -9,6 +9,8 @@ import CodeView from './CodeView'
 
 import TuringTape from './TuringTape'
 
+import ErrorBoundary from './ErrorBoundary'
+
 const styles = theme => ({
     controlPaper: {
         width : 570,
@@ -25,20 +27,12 @@ class Turing extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            scriptList: ["Divisible by 3", "Endless 1/0s", "Increment by 1", "Palindrome Detection"],
-            currentScript: "Divisible by 3",
+            scriptList: ["Endless 1/0s", "Increment by 1", "Ping-Pong"],
+            currentScript: "Endless 1/0s",
 
-            moveList: ["right", "left"],
+            moveList: ["right", "left", "halt"],
 
-            instructions: [
-                {
-                    "currentState": "q0",
-                    "ifRead": "0",
-                    "write": "0",
-                    "goTo": "q0",
-                    "moveTape": "right"
-                },
-            ],
+            instructions: [],
 
             dataList: ["0", "1", "blank"],
 
@@ -47,10 +41,20 @@ class Turing extends React.Component{
             
             currentState: "q0",
 
-            tapeArray: ["0","0","0","0","0","0","0","0","0","0"],
+            tapeArray: ["1","0","0","0","0","0","0","0","0","1"],
             tapePosition: 4,
             play: false,
+            editor: false,
+
+            error: false,
+
         }
+
+        this.startMachine = this.startMachine.bind(this)
+    }
+
+    componentDidMount(){
+        this.endless10Setter()
     }
 
     addStates = () => {
@@ -69,23 +73,17 @@ class Turing extends React.Component{
 
     setScript = (newScript) => {
 
-        
         newScript === "Endless 1/0s" ? this.endless10Setter():
         newScript === "Increment by 1" ? this.incrementOneSetter():
-        newScript === "Divisible by 3" ? this.divisibleByThreeSetter():
-        newScript === "Palindrome Detection" ? this.palindromeSetter():
+        newScript === "Ping-Pong" ? this.genericSetter(): console.log("Nothing to set")
         
-        console.log("No Script set")
-
         this.setState({currentScript: newScript})
-
-        console.log(this.state.currentScript)
     }
 
     addInstruction = () => {
         let tempInstructions = this.state.instructions.slice()
         let newInstruction={
-            "currentState": "q0",
+            "state": "q0",
             "ifRead": "blank",
             "write": "0",
             "goTo": "q0",
@@ -121,36 +119,40 @@ class Turing extends React.Component{
         this.setState({tapeArray: tempTape})
     }
 
-    setPlay = () => {
-        this.setState({play: !this.state.play})
-    } 
+    setPlay = (value) => {
+        this.setState({play: value})
+    }
+
+    setError = (value) => {
+        this.setState({error: value})
+    }
 
     endless10Setter = () => {
         this.setState({stateList: ["q0", "q1", "q2", "q3"]})
         this.setState({instructions: [
             {
-                "currentState": "q0",
+                "state": "q0",
                 "ifRead": "blank",
                 "write": "0",
                 "goTo": "q1",
-                "moveTape": "left"
+                "moveTape": "right"
             },
             {
-                "currentState": "q1",
+                "state": "q1",
                 "ifRead": "blank",
                 "write": "blank",
                 "goTo": "q2",
                 "moveTape": "right"
             },
             {
-                "currentState": "q2",
+                "state": "q2",
                 "ifRead": "blank",
                 "write": "1",
                 "goTo": "q3",
                 "moveTape": "right"
             },
             {
-                "currentState": "q3",
+                "state": "q3",
                 "ifRead": "blank",
                 "write": "blank",
                 "goTo": "q0",
@@ -161,43 +163,148 @@ class Turing extends React.Component{
 
         this.setState({startState: "q0"})
         this.setState({currentState: "q0"})
+        this.setState({tapePosition: 0})
+        this.setState({play: false})
 
     }
 
     incrementOneSetter = () => {
-        this.setState({stateList: ["q0", "q1", "q2", "q3"]})
+        this.setState({stateList: ["q0", "q1", "q2"]})
+        this.setState({instructions: [
+            {
+                "state": "q0",
+                "ifRead": "1",
+                "write": "1",
+                "goTo": "q0",
+                "moveTape": "right"
+            },
+            {
+                "state": "q0",
+                "ifRead": "0",
+                "write": "0",
+                "goTo": "q0",
+                "moveTape": "right"
+            },
+            {
+                "state": "q0",
+                "ifRead": "blank",
+                "write": "blank",
+                "goTo": "q1",
+                "moveTape": "left"
+            },
+            {
+                "state": "q1",
+                "ifRead": "1",
+                "write": "0",
+                "goTo": "q1",
+                "moveTape": "left"
+            },
+            {
+                "state": "q1",
+                "ifRead": "0",
+                "write": "1",
+                "goTo": "q2",
+                "moveTape": "halt"
+            },
+        ]})
+
+        this.setState({tapeArray: ["blank","blank","blank","1","0","1","1","blank","blank","blank"]})
+        this.setState({startState: "q0"})
+        this.setState({currentState: "q0"})
+        this.setState({tapePosition: 3})
+        this.setState({play: false})
     }
 
-    divisibleByThreeSetter = () => {
+    genericSetter = () => {
+        this.setState({stateList: ["q0", "q1"]})
+        this.setState({instructions: [
+            {
+                "state": "q0",
+                "ifRead": "0",
+                "write": "0",
+                "goTo": "q0",
+                "moveTape": "right"
+            },
+            {
+                "state": "q0",
+                "ifRead": "1",
+                "write": "1",
+                "goTo": "q1",
+                "moveTape": "left"
+            },
 
-    }
+            {
+                "state": "q1",
+                "ifRead": "0",
+                "write": "0",
+                "goTo": "q1",
+                "moveTape": "left"
+            },
 
-    palindromeSetter = () => {
-        
+            {
+                "state": "q1",
+                "ifRead": "1",
+                "write": "1",
+                "goTo": "q0",
+                "moveTape": "right"
+            },
+        ]})
+
+        this.setState({tapeArray: ["1","0","0","0","0","0","0","0","0","1"]})
+        this.setState({startState: "q0"})
+        this.setState({currentState: "q0"})
+        this.setState({tapePosition: 4})
+        this.setState({play: false})
     }
 
     startMachine = () => {
-        
-        let temp = this.state.instructions.slice()
-        
-        let currentInstruction = temp.find((element) => element.currentState === this.state.currentState)
+        let tempInstructions = this.state.instructions.slice()
 
-        if (currentInstruction.ifRead === this.state.tapeArray[this.state.tapePosition]) {
+        let tempNextState = tempInstructions.find(instruction => {
             
-            let temp = this.state.tapeArray.slice();
-
-            temp[this.state.tapePosition] = currentInstruction.write
-
-            this.setState({currentState: currentInstruction.goTo})
+            return (instruction.state === this.state.currentState && instruction.ifRead === this.state.tapeArray[this.state.tapePosition])
+        })
+     
+        if(tempNextState === undefined){
+            this.setState({play: true})
+            this.setState({error: true})
+            throw new Error("Incomplete Instructions: Click Reset")
         }
 
+        if (tempNextState.moveTape === "halt"){
+            this.setState({play: true})
+            console.log("HALT")
+        }
+
+        let newTapeArray = this.state.tapeArray.slice()
+        newTapeArray[this.state.tapePosition] = tempNextState.write
+
+        let newTapePosition = this.state.tapePosition + (tempNextState.moveTape === "left" ? -1 : 1)
+
+        // if too left
+        if (newTapePosition < 0){
+            let tempTapeArray = ["blank"].concat(newTapeArray)
+
+            newTapeArray = tempTapeArray
+
+            newTapePosition = 0
+        }
+
+        else if (newTapePosition > this.state.tapeArray.length - 1){
+            newTapeArray.push("blank")
+        }
+
+        this.setState({
+            currentState: tempNextState.goTo,
+            tapeArray: newTapeArray,
+            tapePosition: newTapePosition
+        })
     }
-
-
 
     render(){
         const {classes} = this.props
         return(
+            <ErrorBoundary>
             <Grid
                 container
                 direction="row"
@@ -247,12 +354,14 @@ class Turing extends React.Component{
                             
                             endless10Setter={this.endless10Setter}
                             incrementOneSetter={this.incrementOneSetter}
-                            divisibleByThreeSetter={this.divisibleByThreeSetter}
-                            palindromeSetter={this.palindromeSetter}
+                            genericSetter={this.genericSetter}
 
                             setPlay={this.setPlay}
                             play={this.state.play}
-                            startMachine={this.startMachine}/>
+                            startMachine={this.startMachine}
+                            
+                            error={this.state.error}
+                            setError={this.setError}/>
                         
                         <div style={{marginTop: '24px'}}></div>
                     
@@ -267,11 +376,11 @@ class Turing extends React.Component{
                             <Typography component="a" target="_blank" href="https://www.google.com">
                                 THIS IS SOME TEXT
                             </Typography>
-
                         </Paper>
                     </div>
                 </Grid>
             </Grid>
+            </ErrorBoundary>
         )
     }
 }

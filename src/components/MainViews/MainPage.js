@@ -33,7 +33,7 @@ class MainPage extends React.Component {
     render() {
         const {classes} = this.props
     return (
-        <Grid container direction="column" justify="center" alignItems="center" spacing={48}>
+        <Grid container direction="column" justify="center" alignItems="center" spacing={40}>
             <Grid item><div style={{marginTop: '240px'}}></div></Grid>
             <Grid item>
                 <Typist
