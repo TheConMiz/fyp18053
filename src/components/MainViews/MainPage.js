@@ -40,8 +40,7 @@ class MainPage extends React.Component {
                     className="Typist-header"
                     avgTypingSpeed={40}
                     startDelay={1000}
-                    onTypingDone={this.typingDone}
-                    cursor={{hideWhenDone: true}}>
+                    onTypingDone={this.typingDone}>
 
                     <span>Learnt</span>
 
