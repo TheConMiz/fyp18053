@@ -6,6 +6,8 @@ import TuringView from './MainViews/TuringView'
 import VonNeumannView from './MainViews/VonNeumannView'
 import SortingView from './MainViews/SortingView'
 
+import MainPage from './MainViews/MainPage'
+
 
 // Material UI Components
 import { MuiThemeProvider, createMuiTheme, withStyles} from '@material-ui/core/styles'
@@ -85,6 +87,10 @@ class App extends React.Component {
 
                         <Route exact path="/von_neumann_architecture" render={() => 
                             <VonNeumannView/>
+                        }/>
+
+                        <Route exact path="/" render={() => 
+                            <MainPage/>
                         }/>
                     </Switch>
                 </MuiThemeProvider>

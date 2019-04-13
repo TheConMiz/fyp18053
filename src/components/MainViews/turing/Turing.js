@@ -1,13 +1,13 @@
 import React from 'react'
 
-import Paper from '@material-ui/core/Paper';
+import Paper from '@material-ui/core/Paper'
 import Divider from '@material-ui/core/Divider'
-import {withStyles} from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 
-import TuringAlgo from './TuringAlgo'
-import Controls from './Controls'
+import TuringTransitions from './TuringTransitions'
+// import Controls from './Controls'
 
 const styles = theme => ({
     paper: {
@@ -39,32 +39,43 @@ class Turing extends React.Component{
                 alignItems="center"
                 spacing={24}>
 
-                <Grid item md={12} xs={12}>
-                    <Paper className={classes.paper}>
-                        Loader
+                <Grid item>
+
+                    <Grid 
+                        container
+                        direction="column"
+                        alignItems="center">
+
+                            <Grid item>
+                                <div>states, letters, and transitions</div>
+                            </Grid>    
+                            <Grid item>
+                                <div>turing tape</div>
+                            </Grid>
+                    </Grid>
+
+                </Grid>
+
+                <Grid item>
+                    <Paper className={classes.paper} elevation={7}>
+                        Code view
                     </Paper>
                 </Grid>
 
                 <Grid item md={3} xs={6}>
-                    <Paper className={classes.paper}>
-                        Data Types
-                    </Paper>
-                </Grid>
-
-                <Grid item md={3} xs={6}>
-                    <Paper className={classes.paper}>
-                        States List
+                    <Paper className={classes.paper} elevation={7}>
+                        Controls
                     </Paper>
                 </Grid>
 
                 <Grid item md={6} xs={12}>
-                    <Paper className={classes.paper} elevation={0}>
-                        <TuringAlgo/>
+                    <Paper className={classes.paper} elevation={7}>
+                        References
                     </Paper>
                 </Grid>
 
 
-                <Grid item md={3} xs={0}>
+                {/* <Grid item md={3} xs={0}>
                     <div></div>
                 </Grid>
 
@@ -91,7 +102,7 @@ class Turing extends React.Component{
 
                 <Grid item md={3} xs={0}>
                     <div></div>
-                </Grid>
+                </Grid> */}
 
             </Grid>
 

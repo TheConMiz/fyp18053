@@ -13,9 +13,9 @@ import Grid from '@material-ui/core/Grid'
 
 import SortControls from './SortControls'
 
-import CodeView from '../CodeView'
+import CodeView from './CodeView'
 
-import './SortD3.css'
+import cssStyles from './SortD3.css'
 
 // Styling specifications for the Material UI components
 const styles = theme => ({
@@ -84,9 +84,9 @@ class SortD3 extends React.Component{
         // Stop the setInterval() loop invoked to run the simulation
         clearInterval(this.loop)
 
-        // Reset bar chart coloring to its original state
+        // Reset the loop variable for future use
         this.loop = {}
-        
+        // Reset bar chart coloring to its original state
         d3.select('.barChart').selectAll('rect').attr("class", "")
     }
 
@@ -413,7 +413,8 @@ class SortD3 extends React.Component{
                 direction="row"
                 justify="space-evenly"
                 alignItems="center"
-                spacing={24}>
+                spacing={24}
+                className={cssStyles}>
 
                 <Grid item>
                     <Paper

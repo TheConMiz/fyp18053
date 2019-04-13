@@ -1,0 +1,10 @@
+rect.tape_cell{
+    stroke: #000000;
+    fill: rgba(0, 255, 255, 0.144);
+    opacity: 0.2
+}
+
+rect.tape_cell.head{
+    stroke: #ff9900;
+    stroke-width: 10px;
+}

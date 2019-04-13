@@ -17,7 +17,6 @@ class SortingView extends React.Component{
             <SortD3
                 width={this.state.svgWidth}
                 height={this.state.svgHeight}
-                data={this.state.data}
                 light={this.props.light}/>
         )
     }
