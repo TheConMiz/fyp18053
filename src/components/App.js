@@ -3,9 +3,8 @@ import React from 'react'
 // Self-generated components
 import AppDrawer from './AppDrawer/AppDrawer'
 import TuringView from './MainViews/TuringView'
-import VonNeumannView from './MainViews/VonNeumannView'
+// import VonNeumannView from './MainViews/VonNeumannView'
 import SortingView from './MainViews/SortingView'
-
 import MainPage from './MainViews/MainPage'
 
 // Material UI Components
@@ -15,10 +14,11 @@ import { MuiThemeProvider, createMuiTheme, withStyles} from '@material-ui/core/s
 import {lightTheme, darkTheme} from './themes'
 import {Route, Switch} from 'react-router-dom'
 
-
+// Light and Dark theme assets
 const lTheme = createMuiTheme(lightTheme)
 const dTheme = createMuiTheme(darkTheme)
 
+// Material UI styling assets
 const styles = theme => ({
     root: {
         flexGrow: 1
@@ -34,10 +34,11 @@ class App extends React.Component {
             // Prop for handling changes from Light theme to Dark theme, and vice versa
             light: true,            
             // Prop for list of pages
-            modes: ["Turing Machine", "von Neumann Architecture", "Sorting Algorithms"],
-        }
+            modes: ["Turing Machine", "Sorting Algorithms"],
 
-        // Bind handlers to the App Component
+            //"von Neumann Architecture", 
+        }
+        // Bind handler to the App Component
         this.handleLightChange = this.handleLightChange.bind(this)
     }
 
@@ -47,25 +48,27 @@ class App extends React.Component {
         console.log("Light: " + this.state.light)
     }
 
+    // Getter for "Lght" setting saved in LocalStorage
     componentWillMount(){
         localStorage.getItem('light') && this.setState({
             light: JSON.parse(localStorage.getItem('light')),
         })        
     }
 
+    // Getter for saving "Light" setting in LocalStorage
     componentWillUpdate(nextProps, nextState){
         localStorage.setItem('light', JSON.stringify(nextState.light))
     }
     
-    render() {
-        
+    render() {    
         const {classes} = this.props
         return (
-          
             <div className = {classes.root}>
-        
+
+                {/* Material UI Theming Component*/}
                 <MuiThemeProvider theme = {this.state.light ? lTheme : dTheme}>
 
+                    {/* App Drawer Component*/}
                     <AppDrawer
                         handleLightChange={this.handleLightChange} 
                         light={this.state.light} 
@@ -73,6 +76,7 @@ class App extends React.Component {
                     /> 
 
                     <div style={{marginTop: '90px'}}></div>
+                    {/* Switch Component for hyperlinks*/}
                     <Switch>
                         
                         <Route exact path="/sorting_algorithms" render={() =>                        
@@ -84,10 +88,10 @@ class App extends React.Component {
                             <TuringView
                                 light={this.state.light}/>
                         }/>
-
-                        <Route exact path="/von_neumann_architecture" render={() => 
+                        
+                        {/* <Route exact path="/von_neumann_architecture" render={() => 
                             <VonNeumannView/>
-                        }/>
+                        }/> */}
 
                         <Route exact path="/" render={() => 
                             <MainPage/>

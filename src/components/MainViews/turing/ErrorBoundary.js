@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 
+// Boilerplate code for handling errors from the Turing Machine
 class ErrorBoundary extends React.Component {
     constructor(props) {
       super(props)
@@ -11,7 +11,6 @@ class ErrorBoundary extends React.Component {
     }
   
     componentDidCatch(error, info) {
-      // Display fallback UI
       this.setState({ error: error, info: info });
     }
   

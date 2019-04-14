@@ -1,8 +1,11 @@
 import React from 'react'
+
 import AceEditor from 'react-ace'
 import solarized_dark from 'brace/theme/solarized_dark'
 import github from 'brace/theme/github'
 import javascript from 'brace/mode/javascript'
+
+// Material UI components
 import Paper from '@material-ui/core/Paper/Paper'
 import {withStyles} from '@material-ui/core/styles'
 
@@ -16,15 +19,16 @@ const styles = theme => ({
     },
 })
 
-
 class CodeView extends React.Component {
     constructor(props){
         super(props)
 
+        // States for storing static source code
         this.state = {
 
 bubbleValue:
 `// Bubble Sort: Time Complexity of O(n^2)
+// Source: https://www.geeksforgeeks.org/bubble-sort/
 function bubbleSort(arrayOfValues) {    
     // For each value in the arrayOfValues...
     for (var i = 0; i < arrayOfValues.length; ++i) {
@@ -43,6 +47,7 @@ function bubbleSort(arrayOfValues) {
 
 insertionValue:
 `// Insertion Sort: Time Complexity of O(n^2)
+// Source: https://www.geeksforgeeks.org/insertion-sort/
 function insertionSort(arrayOfValues) {
     var currentKey;
     for (var i = 0; i < arrayOfValues; ++i) {
@@ -58,8 +63,10 @@ function insertionSort(arrayOfValues) {
 `,
 
 quickValue:
-`// Quick Sort: Time Complexity of O(n^2)
+`// Quick Sort: Time Complexity of O(n log n)
+// Source: https://www.geeksforgeeks.org/quick-sort/
 function quickSort(arrayOfValues) {
+    
     
 }`,
 
@@ -75,7 +82,7 @@ function selectionSort(arrayOfValues) {
 
     render(){
         const {classes} = this.props
-
+        // Instance of Ace Editor for displaying static source code
         return(
             <Paper className={classes.root} elevation={7}>
                 <AceEditor
@@ -96,7 +103,7 @@ function selectionSort(arrayOfValues) {
                             this.props.currentScript === "Insertion" ? this.state.insertionValue:
                             this.props.currentScript === "Quick" ? this.state.quickValue: 
                             this.props.currentScript === "Selection" ? this.state.selectionValue:
-                            "// No Script selected..."
+                            "// No Script selected"
                         )}
                     setAutoScrollEditorIntoView={true}
                     setUseWrapMode={true}

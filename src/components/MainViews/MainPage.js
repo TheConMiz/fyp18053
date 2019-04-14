@@ -1,14 +1,17 @@
 import React from 'react'
+
+// Component for the stylised title on the landing page
 import Typist from 'react-typist'
 import './mainPage/MainPage.scss'
 
-import {withStyles} from '@material-ui/core/styles'
+// Component for routing
+import {Link} from 'react-router-dom'
 
+// Material UI Components
+import {withStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import { Typography } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
-
-import {Link} from 'react-router-dom';
 
 const styles = theme => ({
     button: {
@@ -17,6 +20,7 @@ const styles = theme => ({
     },
 })
 
+// Code based on boilerplate provided by the author of "react-typist"
 class MainPage extends React.Component {
     constructor(props){
         super(props)
@@ -31,7 +35,6 @@ class MainPage extends React.Component {
     }
 
     render() {
-        const {classes} = this.props
     return (
         <Grid container direction="column" justify="center" alignItems="center" spacing={40}>
             <Grid item><div style={{marginTop: '240px'}}></div></Grid>

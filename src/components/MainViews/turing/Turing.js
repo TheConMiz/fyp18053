@@ -1,14 +1,19 @@
+// Credits to http://turingmachine.io/
+// Credits to http://morphett.info/turing/
+// Credits tohttp://math.hws.edu/eck/js/turing-machine/TM.html
+
 import React from 'react'
 
+// Material UI components
 import Paper from '@material-ui/core/Paper'
 import {withStyles} from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import TuringControls from './TuringControls'
 import Typography from '@material-ui/core/Typography'
+
+// Self-generated components
 import CodeView from './CodeView'
-
 import TuringTape from './TuringTape'
-
 import ErrorBoundary from './ErrorBoundary'
 
 const styles = theme => ({
@@ -27,6 +32,7 @@ class Turing extends React.Component{
     constructor(props){
         super(props)
         this.state = {
+            // States for storing scripts, machine state, dataset, etc.
             scriptList: ["Endless 1/0s", "Increment by 1", "Ping-Pong"],
             currentScript: "Endless 1/0s",
 
@@ -45,41 +51,42 @@ class Turing extends React.Component{
             tapePosition: 4,
             play: false,
             editor: false,
-
             error: false,
 
         }
-
         this.startMachine = this.startMachine.bind(this)
     }
 
+    // Loads the endless1/0 script as the default on page load
     componentDidMount(){
         this.endless10Setter()
     }
 
+    // Add states to the machine
     addStates = () => {
         let tempStates = this.state.stateList.slice()
         tempStates.push("q" + tempStates.length)
         this.setState({stateList: tempStates})
-        console.log(this.state.stateList)
+        //console.log(this.state.stateList)
     }
 
+    // Remove states from the machine. There will always be a minimum of 1 state
     removeStates = () => {
         let tempStates = this.state.stateList.slice()
         tempStates.pop()
         this.setState({stateList: tempStates})
-        console.log(this.state.stateList)
+        //console.log(this.state.stateList)
     }
 
+    // Setter for scripts
     setScript = (newScript) => {
-
         newScript === "Endless 1/0s" ? this.endless10Setter():
         newScript === "Increment by 1" ? this.incrementOneSetter():
         newScript === "Ping-Pong" ? this.genericSetter(): console.log("Nothing to set")
-        
         this.setState({currentScript: newScript})
     }
 
+    // Add instructions to the machine
     addInstruction = () => {
         let tempInstructions = this.state.instructions.slice()
         let newInstruction={
@@ -94,13 +101,15 @@ class Turing extends React.Component{
         this.setState({instructions: tempInstructions})
     }
 
+    // Remove instructions from the machine
     removeInstruction = () => {
         let tempInstructions = this.state.instructions.slice()
         tempInstructions.pop()
-        console.log(tempInstructions)
+        //console.log(tempInstructions)
         this.setState({instructions: tempInstructions})
     }
 
+    // Setter for instructions
     setInstruction = (newObject, id) => {
         let tempInstructions = this.state.instructions.slice()
         tempInstructions[id] = newObject
@@ -108,8 +117,9 @@ class Turing extends React.Component{
 
     }
 
+    // Modify Tape cells based on their values
     changeCell = (cellId) => {
-        console.log(cellId)
+        //console.log(cellId)
         let tempTape = this.state.tapeArray.slice()
         
         tempTape[cellId] === "0" ? tempTape[cellId] = "1" : 
@@ -119,14 +129,15 @@ class Turing extends React.Component{
         this.setState({tapeArray: tempTape})
     }
 
+    // Some utility setters
     setPlay = (value) => {
         this.setState({play: value})
     }
-
     setError = (value) => {
         this.setState({error: value})
     }
 
+    // Scripts containing instructions, states, etc.
     endless10Setter = () => {
         this.setState({stateList: ["q0", "q1", "q2", "q3"]})
         this.setState({instructions: [
@@ -257,31 +268,33 @@ class Turing extends React.Component{
         this.setState({play: false})
     }
 
+    // Function for running one iteration of the Turing Machine
     startMachine = () => {
-        let tempInstructions = this.state.instructions.slice()
 
+        // Get starting state, and other required information
+        let tempInstructions = this.state.instructions.slice()
         let tempNextState = tempInstructions.find(instruction => {
-            
             return (instruction.state === this.state.currentState && instruction.ifRead === this.state.tapeArray[this.state.tapePosition])
         })
-     
+        
+        // Code for handling possible errror
         if(tempNextState === undefined){
             this.setState({play: true})
             this.setState({error: true})
             throw new Error("Incomplete Instructions: Click Reset")
         }
-
         if (tempNextState.moveTape === "halt"){
             this.setState({play: true})
-            console.log("HALT")
+            //console.log("HALT")
         }
-
+        
+        // Segment for handling changes made to the tape
         let newTapeArray = this.state.tapeArray.slice()
         newTapeArray[this.state.tapePosition] = tempNextState.write
 
         let newTapePosition = this.state.tapePosition + (tempNextState.moveTape === "left" ? -1 : 1)
 
-        // if too left
+        // Handle generation of additional tape to the left
         if (newTapePosition < 0){
             let tempTapeArray = ["blank"].concat(newTapeArray)
 
@@ -290,10 +303,12 @@ class Turing extends React.Component{
             newTapePosition = 0
         }
 
+        // Handle generation of additional tape to the right
         else if (newTapePosition > this.state.tapeArray.length - 1){
             newTapeArray.push("blank")
         }
 
+        // Set state to update values on the screen
         this.setState({
             currentState: tempNextState.goTo,
             tapeArray: newTapeArray,
@@ -313,6 +328,8 @@ class Turing extends React.Component{
                 spacing={24}>
                 
                 <Grid>
+                    
+                    {/* Component for displaying the tape*/}
                     <TuringTape
                         dataList={this.state.dataList}
                         instructions={this.state.instructions}
@@ -326,6 +343,7 @@ class Turing extends React.Component{
 
                 <Grid item>
                     
+                    {/* Component for displaying static commentary, pseudocode, and the like */}
                     <CodeView
                         light={this.props.light}
                         currentScript={this.state.currentScript}/>
@@ -333,6 +351,7 @@ class Turing extends React.Component{
 
                 <Grid item>
                     <div>
+                        {/* Component for handling data operations on the Turing Machine*/}
                         <TuringControls
                             dataList={this.state.dataList}
                             addData={this.addData}
@@ -364,7 +383,8 @@ class Turing extends React.Component{
                             setError={this.setError}/>
                         
                         <div style={{marginTop: '24px'}}></div>
-                    
+
+                        {/* Component for displaying references, and the like */}
                         <Paper
                             className={classes.controlPaper}
                             elevation={7}>
@@ -373,6 +393,12 @@ class Turing extends React.Component{
                                 References
                             </Typography>
 
+                            <Typography component="a" target="_blank" href="https://www.google.com">
+                                THIS IS SOME TEXT
+                            </Typography>
+                            <Typography component="a" target="_blank" href="https://www.google.com">
+                                THIS IS SOME TEXT
+                            </Typography>
                             <Typography component="a" target="_blank" href="https://www.google.com">
                                 THIS IS SOME TEXT
                             </Typography>

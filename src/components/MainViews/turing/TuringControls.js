@@ -1,34 +1,28 @@
 import React, { Fragment } from 'react'
+
+// Material UI components
 import {withStyles} from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
-
 import IconButton from '@material-ui/core/IconButton'
 import ToolTip from '@material-ui/core/Tooltip'
 import PlayArrow from '@material-ui/icons/PlayArrow/'
-import Stop from '@material-ui/icons/Stop'
 import Refresh from '@material-ui/icons/Refresh'
-
 import Button from '@material-ui/core/Button'
-import { Typography, FormGroup} from '@material-ui/core'
-
+import { Typography} from '@material-ui/core'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
-
 import Dialog from '@material-ui/core/Dialog'
-
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-
 import Divider from '@material-ui/core/Divider'
-
 import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
 import Input from '@material-ui/core/Input'
 import MenuItem from '@material-ui/core/MenuItem'
 
-
+// Material UI styling assets
 const styles = theme => ({
     controlPaper: {
         width : 570,
@@ -68,7 +62,6 @@ class TuringControls extends React.Component{
 
     constructor(props){
         super(props)
-
         this.state = {
             scriptMenu: false,
             stateMenu: false,
@@ -76,14 +69,13 @@ class TuringControls extends React.Component{
         }
     }
 
+    // Menu toggles
     scriptMenuOpen = () => {
         this.setState({scriptMenu: !this.state.scriptMenu})
     }
-
     stateMenuOpen = () => {
         this.setState({stateMenu: !this.state.stateMenu})
     }
-
     instructionsMenuOpen = () => {
         this.setState({instructionsMenu: !this.state.instructionsMenu})
     }
@@ -94,7 +86,7 @@ class TuringControls extends React.Component{
             <Paper 
                 className={classes.controlPaper}
                 elevation={7}>
-
+                {/* Button for running one iteration of the Turing Machine*/}
                 <IconButton
                     color="secondary"
                     onClick={() => {
@@ -105,7 +97,8 @@ class TuringControls extends React.Component{
                         <PlayArrow/>
                     </ToolTip>
                 </IconButton>
-                        
+
+                {/* Button for resetting the Turing Machine, in case of errors*/}
                 <IconButton
                     color="secondary"
                     onClick={()=> {
@@ -119,7 +112,7 @@ class TuringControls extends React.Component{
                         <Refresh/>
                     </ToolTip>
                 </IconButton>
-
+                {/* Button for selecting script*/}
                 <Button
                     className={classes.button}
                     color="primary"
@@ -131,6 +124,7 @@ class TuringControls extends React.Component{
                     </Typography>
                 </Button>
 
+                {/* Button for selecting and changing states*/}
                 <Button
                     className={classes.button}
                     color="primary"
@@ -142,6 +136,7 @@ class TuringControls extends React.Component{
                     </Typography>
                 </Button>
 
+                {/* Button for changing instructions*/}
                 <Button
                     className={classes.button}
                     color="primary"
@@ -153,6 +148,7 @@ class TuringControls extends React.Component{
                     </Typography>
                 </Button>
 
+                {/* Forms for performing data operations on the machine*/}
                 <Dialog
                     open={this.state.scriptMenu}
                     className={classes.dialog}>
@@ -435,6 +431,7 @@ class TuringControls extends React.Component{
                     </Button>
                 </Dialog>
 
+                {/* Code ofr handling error messages*/}
                 {this.props.error ? 
                     <Typography 
                         className={classes.typography} 

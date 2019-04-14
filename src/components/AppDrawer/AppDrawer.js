@@ -1,10 +1,11 @@
 import React from 'react'
+
 //Material UI Components
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import AppBar from '@material-ui/core/AppBar/AppBar'
 import Divider from '@material-ui/core/Divider'
 import ListItemText from '@material-ui/core/ListItemText'
-import IconButton from '@material-ui/core/IconButton/IconButton';
+import IconButton from '@material-ui/core/IconButton/IconButton'
 import Toolbar from '@material-ui/core/Toolbar/Toolbar'
 import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
@@ -13,23 +14,23 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import ListSubheader from '@material-ui/core/ListSubheader'
 import Hidden from '@material-ui/core/Hidden/Hidden'
 import ToolTip from '@material-ui/core/Tooltip/Tooltip'
-
 import MenuList from '@material-ui/core/MenuList'
 import MenuItem from '@material-ui/core/MenuItem'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
+import Collapse from '@material-ui/core/Collapse'
 
-import {compose} from 'recompose';
+// Component for grouping multiple export types together
+import {compose} from 'recompose'
 
+// Component for handling Light/Dark theme changes
 import LightSwitch from './assets/LightSwitch'
 
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+// Components for Routing
+import {Link, withRouter} from 'react-router-dom'
 
-import Collapse from '@material-ui/core/Collapse';
-
-import {Link, withRouter} from 'react-router-dom';
-
+// Github logo for About Section
 import { GoMarkGithub } from 'react-icons/go'
-
 
 const drawerWidth = 240
 
@@ -81,13 +82,17 @@ const styles = theme => ({
 class AppDrawer extends React.Component{
   constructor(props){
     super(props)
-    this.state = { 
+    this.state = {
+      // State for toggling the Side menu
       drawer: false,
+      // State for generating list of Side menu buttons
       modes: this.props.modes,
+      // State for toggling About section
       about: false,
     }
   }
 
+  // State handlers
   handleMenuOpen = () =>{
     this.setState(state => ({drawer: !this.state.drawer}))
   }
@@ -99,14 +104,12 @@ class AppDrawer extends React.Component{
   render(){
     const {classes, modes} = this.props
     
-    // Pre-defined App Drawer
+    // Pre-defined App Drawer, courtesy of Material UI
     const appDrawer = (
       <div>
-
         <div className={classes.appDrawer}>
-          
           <MenuList subheader={<ListSubheader component="div" >Learn+</ListSubheader>}>
-            
+
             <Divider/>
 
             {/*Code block for mapping mode props to Menu Item names*/}
@@ -143,7 +146,6 @@ class AppDrawer extends React.Component{
               
               </MenuItem>
 
-            {/*TODO:ABOUT US STUFF*/}
             <Collapse in={this.state.about} timeout="auto" unmountOnExit>
               <MenuList>
                 <MenuItem
@@ -189,7 +191,6 @@ class AppDrawer extends React.Component{
             </SwipeableDrawer>
           </Hidden>
         </nav>
-
       </div>
     )
   }
@@ -198,4 +199,4 @@ class AppDrawer extends React.Component{
 export default compose(
   withStyles(styles, {withTheme: true}),
   withRouter
-) (AppDrawer);
+) (AppDrawer)

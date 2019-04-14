@@ -1,30 +1,24 @@
 import React from 'react'
+
+// Material UI components
 import {withStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-
 import IconButton from '@material-ui/core/IconButton'
 import ToolTip from '@material-ui/core/Tooltip'
 import PlayArrow from '@material-ui/icons/PlayArrow/'
 import Stop from '@material-ui/icons/Stop'
 import Refresh from '@material-ui/icons/Refresh'
-
 import Button from '@material-ui/core/Button'
 import { Typography} from '@material-ui/core';
-
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-
 import Dialog from '@material-ui/core/Dialog';
-
 import TextField from '@material-ui/core/TextField';
-
 import Divider from '@material-ui/core/Divider'
 
-
-import ScriptMenu from './ScriptMenu'
-
+// Material UI styling
 const styles = theme => ({
     simView: {
         width : 570,
@@ -72,6 +66,7 @@ class SortControls extends React.Component{
         }
     }
 
+    // Handles toggle of script menu
     scriptMenuOpen = () => {
         this.setState({scriptMenu: !this.state.scriptMenu})
     }
@@ -83,6 +78,7 @@ class SortControls extends React.Component{
                 className={classes.controlPaper}
                 elevation={7}>
 
+                {/*Button for Playing simulations*/}
                 <IconButton
                     color="secondary"
                     onClick={() => {
@@ -94,12 +90,15 @@ class SortControls extends React.Component{
                         
                         this.props.setPlay()
                     }}
+
                     disabled={this.props.play}>
+
                     <ToolTip title = "Start">
                         <PlayArrow/>
                     </ToolTip>
                 </IconButton>
 
+                {/*Button for stopping simulations*/}
                 <IconButton
                     color="secondary"
                     disabled={!this.props.play}
@@ -111,7 +110,8 @@ class SortControls extends React.Component{
                         <Stop/>
                     </ToolTip>
                 </IconButton>
-                        
+                
+                {/*Button for resetting simulations*/}
                 <IconButton
                     color="secondary" 
                     className={classes.button}
@@ -122,6 +122,7 @@ class SortControls extends React.Component{
                     </ToolTip>
                 </IconButton>
 
+                {/*Button for selecting simulations*/}
                 <Button
                     className={classes.button}
                     color="primary"
@@ -135,6 +136,7 @@ class SortControls extends React.Component{
 
                 </Button>
 
+                {/*Dialog pop-up for selecting simulation simulations*/}
                 <Dialog
                     open={this.state.scriptMenu}
                     className={classes.dialog}>
@@ -174,6 +176,7 @@ class SortControls extends React.Component{
                         </Button>
                 </Dialog>
 
+                {/*Text field for setting simulation speed*/}
                 <TextField
                     id="speed"
                     label="Set Interval"
@@ -190,6 +193,7 @@ class SortControls extends React.Component{
                     helperText="The smaller, the quicker!">
                 </TextField>
 
+                 {/*Text field for setting simulation speed*/}
                 <TextField
                     id="dataSize"
                     label="Set Data Size"
@@ -208,7 +212,6 @@ class SortControls extends React.Component{
             </Paper>
         )
     }
-
 }
 
 export default withStyles(styles, {withTheme: true})(SortControls)
