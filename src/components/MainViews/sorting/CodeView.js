@@ -49,15 +49,23 @@ insertionValue:
 `// Insertion Sort: Time Complexity of O(n^2)
 // Source: https://www.geeksforgeeks.org/insertion-sort/
 function insertionSort(arrayOfValues) {
+
+    // For each value, set it as a key
     var currentKey;
     for (var i = 0; i < arrayOfValues; ++i) {
+        
         currentKey = arrayOfValues[i];
         var j = i - 1;
 
+        // Elements that are greater than the key are pushed a position further
+
         while (j >= 0 && arrayOfValues[j] > currentKey) {
             
+            arrayOfValues[j + 1] = arrayOfValues[j];
+            
+            --j;
         }
-
+        arrayOfValues[j + 1] = currentKey;
     }
 }
 `,
@@ -65,14 +73,57 @@ function insertionSort(arrayOfValues) {
 quickValue:
 `// Quick Sort: Time Complexity of O(n log n)
 // Source: https://www.geeksforgeeks.org/quick-sort/
-function quickSort(arrayOfValues) {
+
+function partition(arrayOfValues, low, high) {
+    var pivot = arrayOfValues[high];
     
+    // Set the index of the smaller value
+    var i = low - 1;
     
+    // If the current value is smaller than or equal to the pivot,
+    // The index is increased, and the two are swapped
+    for (var j = low; j <= high - 1; ++j) {
+
+        if (arrayOfValues[j] <= pivot) {
+            ++i;
+            swap(arrayOfValues[i], arrayOfValues[j]);
+        }
+    }
+
+    swap(arrayOfValues[i + 1], arrayOfValues[high])
+}
+
+function quickSort(arrayOfValues, low, high) {
+    // Uses recursion to solve the problem!
+
+    // Set pi to partition the array
+    var pi = partition(arrayOfValues, low, high);
+
+    // Recursively sort separated elements
+    quickSort(arrayOfValues, low, pi - 1);
+    quickSort(arrayOfValues, pi + 1, high);
 }`,
 
 selectionValue:
 `// Selection Sort: Time Complexity of O(n^2)
+// Source: https://www.geeksforgeeks.org/selection-sort/
 function selectionSort(arrayOfValues) {
+
+    // For each value in the array
+    for (var i = 0; i < arrayOfValues.length; ++i) {
+        
+        // Find the smallest smallest value by comparison
+        var minId = i;
+
+        for (var j = i + 1; j < n; ++j) {
+            if (arrayOfValues[j] < arrayOfValues[minId]) {
+                minId = j;
+            }
+        }
+
+        // Swap the smallest element with the initial element
+        swap(arrayOfValues[minId], arrayOfValues[i]);
+    }
     
 }`,
 

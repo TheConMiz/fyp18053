@@ -393,14 +393,11 @@ class Turing extends React.Component{
                                 References
                             </Typography>
 
-                            <Typography component="a" target="_blank" href="https://www.google.com">
-                                THIS IS SOME TEXT
+                            <Typography component="a" variant="h6" target="_blank" href="hhttps://www.youtube.com/watch?v=dNRDvLACg5Q">
+                                What is a Turing Machine?
                             </Typography>
-                            <Typography component="a" target="_blank" href="https://www.google.com">
-                                THIS IS SOME TEXT
-                            </Typography>
-                            <Typography component="a" target="_blank" href="https://www.google.com">
-                                THIS IS SOME TEXT
+                            <Typography component="a" variant="h6" target="_blank" href="https://www.youtube.com/watch?v=gtRLmL70TH0">
+                                Who is Alan Turing?
                             </Typography>
                         </Paper>
                     </div>

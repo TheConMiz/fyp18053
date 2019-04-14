@@ -501,16 +501,16 @@ class SortD3 extends React.Component{
                             References
                         </Typography>
 
-                        <Typography component="a" target="_blank" href="https://www.google.com">
-                            THIS IS SOME TEXT
+                        <Typography component="a" variant="h6" target="_blank" href="https://www.youtube.com/watch?v=kPRA0W1kECg">
+                            Visualisations of some sorting algorithms
                         </Typography>
 
-                        <Typography component="a" target="_blank" href="https://www.google.com">
-                            THIS IS SOME TEXT
+                        <Typography component="a" variant="h6" target="_blank" href="https://www.geeksforgeeks.org/understanding-time-complexity-simple-examples/">
+                            What is a "Time Complexity"?
                         </Typography>
 
-                        <Typography component="a" target="_blank" href="https://www.google.com">
-                            THIS IS SOME TEXT
+                        <Typography component="a" variant="h6" target="_blank" href="https://www.w3resource.com/c-programming-exercises/searching-and-sorting/index.php">
+                            Implement your own!
                         </Typography>
 
                     </Paper>
