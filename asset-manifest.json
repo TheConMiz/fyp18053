@@ -1,13 +1,22 @@
 {
-  "main.css": "/fyp18053/static/css/main.947c885d.chunk.css",
-  "main.js": "/fyp18053/static/js/main.a3b0459e.chunk.js",
-  "main.js.map": "/fyp18053/static/js/main.a3b0459e.chunk.js.map",
-  "runtime~main.js": "/fyp18053/static/js/runtime~main.d09e76d8.js",
-  "runtime~main.js.map": "/fyp18053/static/js/runtime~main.d09e76d8.js.map",
-  "static/js/2.5e9c390b.chunk.js": "/fyp18053/static/js/2.5e9c390b.chunk.js",
-  "static/js/2.5e9c390b.chunk.js.map": "/fyp18053/static/js/2.5e9c390b.chunk.js.map",
-  "index.html": "/fyp18053/index.html",
-  "precache-manifest.946292b0c6664b663eba325fe9f546f2.js": "/fyp18053/precache-manifest.946292b0c6664b663eba325fe9f546f2.js",
-  "service-worker.js": "/fyp18053/service-worker.js",
-  "static/css/main.947c885d.chunk.css.map": "/fyp18053/static/css/main.947c885d.chunk.css.map"
+  "files": {
+    "main.css": "/fyp18053/static/css/main.276b8e8b.chunk.css",
+    "main.js": "/fyp18053/static/js/main.c75458aa.chunk.js",
+    "main.js.map": "/fyp18053/static/js/main.c75458aa.chunk.js.map",
+    "runtime-main.js": "/fyp18053/static/js/runtime-main.f0b4b5d2.js",
+    "runtime-main.js.map": "/fyp18053/static/js/runtime-main.f0b4b5d2.js.map",
+    "static/js/2.029683d2.chunk.js": "/fyp18053/static/js/2.029683d2.chunk.js",
+    "static/js/2.029683d2.chunk.js.map": "/fyp18053/static/js/2.029683d2.chunk.js.map",
+    "index.html": "/fyp18053/index.html",
+    "precache-manifest.dfbd64b7f58dd4897eb9ac64d963e220.js": "/fyp18053/precache-manifest.dfbd64b7f58dd4897eb9ac64d963e220.js",
+    "service-worker.js": "/fyp18053/service-worker.js",
+    "static/css/main.276b8e8b.chunk.css.map": "/fyp18053/static/css/main.276b8e8b.chunk.css.map",
+    "static/js/2.029683d2.chunk.js.LICENSE": "/fyp18053/static/js/2.029683d2.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f0b4b5d2.js",
+    "static/js/2.029683d2.chunk.js",
+    "static/css/main.276b8e8b.chunk.css",
+    "static/js/main.c75458aa.chunk.js"
+  ]
 }
