@@ -1,8 +1,8 @@
 import React from 'react'
 import AceEditor from 'react-ace'
-import solarized_dark from 'brace/theme/solarized_dark'
-import github from 'brace/theme/github'
-import javascript from 'brace/mode/javascript'
+// import solarized_dark from 'brace/theme/solarized_dark'
+// import github from 'brace/theme/github'
+// import javascript from 'brace/mode/javascript'
 import Paper from '@material-ui/core/Paper/Paper'
 import {withStyles} from '@material-ui/core/styles'
 
@@ -77,7 +77,7 @@ pingPongValue:
                     wrapEnabled={true}
                     onLoad={this.onLoad}
                     onChange={this.onChange}
-                    mode="javascript"
+                    // mode="javascript"
                     fontSize={18}
                     theme={(!this.props.light)? "solarized_dark": "github"}
                     highlightActiveLine={true}

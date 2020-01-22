@@ -1,9 +1,9 @@
 import React from 'react'
 
 import AceEditor from 'react-ace'
-import solarized_dark from 'brace/theme/solarized_dark'
-import github from 'brace/theme/github'
-import javascript from 'brace/mode/javascript'
+// import solarized_dark from 'brace/theme/solarized_dark'
+// import github from 'brace/theme/github'
+// import javascript from 'brace/mode/javascript'
 
 // Material UI components
 import Paper from '@material-ui/core/Paper/Paper'
@@ -142,7 +142,7 @@ function selectionSort(arrayOfValues) {
                     wrapEnabled={true}
                     onLoad={this.onLoad}
                     onChange={this.onChange}
-                    mode="javascript"
+                    // mode="javascript"
                     fontSize={15}
                     tabSize={4}
                     theme={(!this.props.light)? "solarized_dark": "github"}

@@ -430,6 +430,12 @@ class SortD3 extends React.Component{
 
             this.setState({data: currentData})
     }
+    
+    //TODO: STALIN SORT 
+
+    // stalinSort = () => {
+        
+    // }
 
     render() {
         const {classes} = this.props
